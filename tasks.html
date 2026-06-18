@@ -119,9 +119,14 @@
     <button class="toolbar-btn" id="copyBtn" onclick="copyTaskReport()">Copy task report</button>
   </div>
 
+  <!-- SITEMAP CONFIRMATION -->
+  <div class="section-title"><span>Step 1 — Confirm the Sitemap</span><span class="section-badge master">Start here before reviewing content</span></div>
+  <p class="section-intro">Before any content is finalised, confirm that every page on the sitemap is correct. Add anything missing, remove anything not needed, and flag any page names that should change. The sitemap drives everything — get this right first.</p>
+  <div id="sitemapTasksContainer"></div>
+
   <!-- MASTER TASKS -->
-  <div class="section-title"><span>Master Tasks</span><span class="section-badge master">Answer once — applies across multiple pages</span></div>
-  <p class="section-intro">These 20 tasks appear on more than one page. Answer each here and the same answer covers every page that needs it — no need to repeat yourself for each individual document.</p>
+  <div class="section-title"><span>Step 2 — Master Tasks</span><span class="section-badge master">Answer once — applies across multiple pages</span></div>
+  <p class="section-intro">These tasks appear on more than one page. Answer each here and the same answer covers every page that needs it — no need to repeat yourself for each individual document.</p>
   <div id="masterTasksContainer"></div>
 
   <!-- PAGE-BY-PAGE -->
@@ -134,6 +139,19 @@
 <footer>Prepared by Attain Digital &nbsp;·&nbsp; Wiltshire Energy Website Project &nbsp;·&nbsp; First Draft — June 2026</footer>
 
 <script>
+const SITEMAP_TASKS = [
+  { id:'sm-nav-structure',   task:'Confirm the top-level navigation structure is correct — For Home, For Business, Projects, Resources, About Us, Contact Us', note:'This sets the entire site architecture' },
+  { id:'sm-home-services',   task:'Confirm all 6 home services are correct and active: Air Source Heat Pumps, Ground Source Heat Pumps, Solar PV, EV Chargers, Storage Heaters, Insulation', note:'Remove any not offered; add any missing' },
+  { id:'sm-biz-services',    task:'Confirm all 4 business services are correct: Renewable Technology, Solar PV, Design & Feasibility, Funding Support', note:'Remove any not offered; add any missing' },
+  { id:'sm-resources',       task:'Confirm Resources contains the right sub-sections: Grants & Incentives, Blog, FAQs', note:'Anything else to include under Resources?' },
+  { id:'sm-grants-list',     task:'Confirm all 7 grant pages are needed: Boiler Upgrade Scheme, Great British Insulation, Energy Company Obligation, EV Homecharge, Warm and Well, Barclays Greener Home Reward', note:'Remove any grants you do not actively support' },
+  { id:'sm-projects-name',   task:'Confirm the nav label — "Projects" or "Case Studies"? (Cotswold Energy uses "Case studies")', note:'Affects the nav label and URL structure' },
+  { id:'sm-about-sub',       task:'Confirm About Us is a single page with no sub-pages in the nav — or should Join Our Team appear as a sub-item?', note:'Currently Join Our Team sits under Other Pages' },
+  { id:'sm-other-pages',     task:'Confirm which Other Pages are needed: Join Our Team, Service & Maintenance, Privacy Policy, Terms & Conditions, Cookie Policy', note:'Add any missing utility or legal pages' },
+  { id:'sm-additional',      task:'Are there any pages not currently on the sitemap that need to be added? (e.g. battery storage, solar thermal, testimonials, finance page)', note:'Flag anything missing before content is written' },
+  { id:'sm-url-structure',   task:'Confirm the URL structure is correct — e.g. /service/home/solar-pv/ and /grants-and-incentives/boiler-upgrade-scheme/', note:'Changes now are easy; changes after build are not' },
+];
+
 const MASTER_TASKS = [
   { id:'phone-number',      category:'Brand & Contact',     task:'Confirm which phone number to use and where — 0333 577 6065 (seen in header) vs 02456 875621 (seen on current site footer). Which is primary?', pages:['Homepage','Contact','All CTAs'] },
   { id:'mcs-cert',          category:'Accreditations',      task:'Confirm MCS certification is current and active — required for BUS applications and referenced on all service pages', pages:['Boiler Upgrade Scheme','Grants Overview','About Us','All service pages'] },
@@ -193,6 +211,33 @@ const getMasterDone = id  => localStorage.getItem('we-master-' + id) === '1';
 const setMasterDone = (id,v) => localStorage.setItem('we-master-' + id, v ? '1' : '0');
 const getPageDone   = (pid,ti) => localStorage.getItem(`we-task-${pid}-${ti}`) === '1';
 const setPageDone   = (pid,ti,v) => localStorage.setItem(`we-task-${pid}-${ti}`, v ? '1' : '0');
+
+function buildSitemapTasks() {
+  const container = document.getElementById('sitemapTasksContainer');
+  container.innerHTML = '';
+  SITEMAP_TASKS.forEach(t => {
+    const done = localStorage.getItem('we-sitemap-' + t.id) === '1';
+    const div = document.createElement('div');
+    div.className = `task-card${done?' done':''}`;
+    div.dataset.id = t.id;
+    div.innerHTML = `
+      <div class="task-card-header">
+        <input type="checkbox" class="task-cb" ${done?'checked':''} onchange="handleSitemapCheck(this,'${t.id}')">
+        <div class="task-card-body">
+          <div class="task-card-title">${t.task}</div>
+          <div class="task-pages"><span class="task-page-tag" style="background:#f0fdf4;color:#166534;">${t.note}</span></div>
+        </div>
+      </div>`;
+    container.appendChild(div);
+  });
+}
+
+function handleSitemapCheck(cb, id) {
+  const done = cb.checked;
+  localStorage.setItem('we-sitemap-' + id, done ? '1' : '0');
+  cb.closest('.task-card').classList.toggle('done', done);
+  updateOverall();
+}
 
 function buildMasterTasks() {
   const cats = {};
@@ -287,10 +332,11 @@ function handlePageCheck(cb) {
 }
 
 function updateOverall() {
-  const masterDone = MASTER_TASKS.filter(t => getMasterDone(t.id)).length;
-  const pageDone   = PAGES.reduce((sum,p) => sum + p.tasks.filter((_,ti) => getPageDone(p.id,ti)).length, 0);
-  const total      = MASTER_TASKS.length + PAGES.reduce((s,p)=>s+p.tasks.length,0);
-  const totalDone  = masterDone + pageDone;
+  const sitemapDone = SITEMAP_TASKS.filter(t => localStorage.getItem('we-sitemap-' + t.id) === '1').length;
+  const masterDone  = MASTER_TASKS.filter(t => getMasterDone(t.id)).length;
+  const pageDone    = PAGES.reduce((sum,p) => sum + p.tasks.filter((_,ti) => getPageDone(p.id,ti)).length, 0);
+  const total       = SITEMAP_TASKS.length + MASTER_TASKS.length + PAGES.reduce((s,p)=>s+p.tasks.length,0);
+  const totalDone   = sitemapDone + masterDone + pageDone;
   const pct        = Math.round((totalDone / total) * 100);
   document.getElementById('masterDone').textContent = masterDone + '/' + MASTER_TASKS.length;
   document.getElementById('pageDone').textContent   = pageDone;
@@ -301,9 +347,10 @@ function updateOverall() {
 
 function resetAllTasks() {
   if (!confirm('Reset all task checkboxes on this page?')) return;
+  SITEMAP_TASKS.forEach(t => localStorage.removeItem('we-sitemap-' + t.id));
   MASTER_TASKS.forEach(t => localStorage.removeItem('we-master-' + t.id));
   PAGES.forEach(p => p.tasks.forEach((_,ti) => localStorage.removeItem(`we-task-${p.id}-${ti}`)));
-  buildMasterTasks(); buildPageTasks(); updateOverall();
+  buildSitemapTasks(); buildMasterTasks(); buildPageTasks(); updateOverall();
 }
 
 function copyTaskReport() {
@@ -330,6 +377,7 @@ function copyTaskReport() {
   });
 }
 
+buildSitemapTasks();
 buildMasterTasks();
 buildPageTasks();
 updateOverall();
