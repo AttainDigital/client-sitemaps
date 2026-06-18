@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wiltshire Energy — All Tasks</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f4f6f9; color: #1a2332; min-height: 100vh; }
+
+  header { background: #1a3a5c; color: #fff; padding: 40px 48px 36px; }
+  .header-inner { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
+  .header-text { flex: 1; }
+  .badge { display: inline-block; background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.85); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; }
+  header h1 { font-size: 1.9rem; font-weight: 700; margin-bottom: 8px; }
+  header p { font-size: 0.95rem; color: rgba(255,255,255,0.65); max-width: 580px; line-height: 1.6; }
+  .header-nav { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; padding-top: 8px; flex-shrink: 0; }
+  .nav-link { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: #fff; text-decoration: none; font-size: 0.82rem; font-weight: 600; padding: 8px 16px; border-radius: 7px; border: 1px solid rgba(255,255,255,0.2); transition: background 0.15s; white-space: nowrap; }
+  .nav-link:hover { background: rgba(255,255,255,0.22); }
+  .nav-link.active { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.4); }
+
+  .main { max-width: 960px; margin: 0 auto; padding: 48px 48px 80px; }
+
+  /* OVERALL PROGRESS */
+  .overall-progress { background: #fff; border: 1px solid #dde4ed; border-radius: 12px; padding: 24px 28px; margin-bottom: 40px; display: flex; gap: 32px; align-items: center; flex-wrap: wrap; }
+  .op-stat { text-align: center; }
+  .op-num  { font-size: 2rem; font-weight: 700; color: #1a3a5c; line-height: 1; }
+  .op-label { font-size: 0.75rem; color: #8a9bb0; margin-top: 2px; }
+  .op-bar-wrap { flex: 1; min-width: 200px; }
+  .op-bar-label { font-size: 0.82rem; font-weight: 600; color: #1a3a5c; margin-bottom: 6px; display: flex; justify-content: space-between; }
+  .op-bar-bg { background: #edf0f5; border-radius: 8px; height: 12px; overflow: hidden; }
+  .op-bar-fill { height: 100%; border-radius: 8px; background: #1a3a5c; transition: width 0.4s; width: 0%; }
+  .toolbar-row { display: flex; gap: 10px; justify-content: flex-end; margin-bottom: 16px; }
+  .toolbar-btn { background: #f1f5f9; border: 1px solid #dde4ed; border-radius: 6px; padding: 7px 14px; font-size: 0.78rem; font-weight: 600; cursor: pointer; color: #1a3a5c; transition: background 0.15s; }
+  .toolbar-btn:hover { background: #e2e8f0; }
+  .toolbar-btn.copy-success { background: #dcfce7; color: #166534; border-color: #86efac; }
+
+  /* SECTION HEADERS */
+  .section-title { font-size: 1.05rem; font-weight: 700; color: #1a3a5c; margin-bottom: 16px; margin-top: 40px; display: flex; align-items: center; gap: 10px; }
+  .section-title:first-of-type { margin-top: 0; }
+  .section-badge { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; padding: 3px 10px; border-radius: 20px; background: #e8f0fe; color: #1a3a5c; }
+  .section-badge.master { background: #1a3a5c; color: #fff; }
+  .section-intro { font-size: 0.85rem; color: #5a6a7d; line-height: 1.6; margin-bottom: 20px; max-width: 700px; }
+
+  /* TASK CARDS */
+  .task-card { background: #fff; border: 1px solid #dde4ed; border-radius: 10px; padding: 20px 24px; margin-bottom: 10px; }
+  .task-card-header { display: flex; align-items: flex-start; gap: 14px; }
+  .task-cb { width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px; cursor: pointer; accent-color: #1a3a5c; }
+  .task-card-body { flex: 1; }
+  .task-card-title { font-size: 0.88rem; font-weight: 600; color: #1a2332; line-height: 1.4; margin-bottom: 4px; }
+  .task-card.done .task-card-title { text-decoration: line-through; color: #94a3b8; }
+  .task-pages { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+  .task-page-tag { font-size: 0.68rem; font-weight: 600; background: #f1f5f9; color: #5a6a7d; padding: 2px 8px; border-radius: 3px; }
+
+  /* PAGE TASK GROUPS */
+  .page-group { background: #fff; border: 1px solid #dde4ed; border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
+  .page-group-header { display: flex; align-items: center; gap: 12px; padding: 14px 20px; cursor: pointer; background: #fff; transition: background 0.15s; }
+  .page-group-header:hover { background: #fafbfd; }
+  .page-group-name { font-size: 0.88rem; font-weight: 700; flex: 1; }
+  .page-group-count { font-size: 0.75rem; color: #64748b; background: #f1f5f9; padding: 2px 8px; border-radius: 20px; }
+  .page-group-done { font-size: 0.75rem; font-weight: 600; color: #166534; background: #dcfce7; padding: 2px 8px; border-radius: 20px; }
+  .pg-expand { font-size: 0.65rem; color: #94a3b8; transition: transform 0.2s; margin-left: 4px; }
+  .page-group.open .pg-expand { transform: rotate(90deg); }
+  .page-group-body { display: none; padding: 4px 20px 16px 20px; border-top: 1px solid #f3f5f8; }
+  .page-group.open .page-group-body { display: block; }
+  .page-task-list { list-style: none; display: flex; flex-direction: column; gap: 10px; padding-top: 12px; }
+  .page-task-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.82rem; color: #374151; line-height: 1.45; }
+  .page-task-item .task-cb { width: 16px; height: 16px; }
+  .page-task-item.done { color: #94a3b8; }
+  .page-task-item.done span { text-decoration: line-through; }
+  .section-label { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 2px 8px; border-radius: 3px; white-space: nowrap; }
+  .sl-core       { background: #e8f0fe; color: #1a56db; }
+  .sl-services-h { background: #e9f5db; color: #1b4332; }
+  .sl-services-b { background: #ddeef8; color: #0d3d56; }
+  .sl-grants     { background: #fff3cd; color: #664d03; }
+  .sl-about      { background: #f0e6ff; color: #3d1a78; }
+
+  footer { text-align: center; padding: 24px; font-size: 0.78rem; color: #aab; border-top: 1px solid #e8ecf0; margin-top: 20px; }
+
+  @media (max-width: 680px) {
+    header { padding: 28px 24px; }
+    .header-inner { flex-direction: column; }
+    .main { padding: 32px 24px 60px; }
+    .overall-progress { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-text">
+      <div class="badge">Prepared by Attain Digital</div>
+      <h1>Wiltshire Energy — All Tasks</h1>
+      <p>Every review task across all 27 pages. Start with the Master Tasks — answer each once and it covers multiple pages. Then work through the page-by-page tasks below.</p>
+    </div>
+    <div class="header-nav">
+      <a href="index.html" class="nav-link">📋 Overview</a>
+      <a href="tasks.html" class="nav-link active">✅ All Tasks</a>
+    </div>
+  </div>
+</header>
+
+<div class="main">
+
+  <!-- OVERALL PROGRESS -->
+  <div class="overall-progress">
+    <div class="op-stat"><div class="op-num" id="masterDone">0</div><div class="op-label">Master tasks done</div></div>
+    <div class="op-stat"><div class="op-num" id="pageDone">0</div><div class="op-label">Page tasks done</div></div>
+    <div class="op-stat"><div class="op-num" id="totalDone">0</div><div class="op-label">Total done</div></div>
+    <div class="op-bar-wrap">
+      <div class="op-bar-label"><span>Overall task progress</span><span id="totalPct">0%</span></div>
+      <div class="op-bar-bg"><div class="op-bar-fill" id="totalBar"></div></div>
+    </div>
+  </div>
+
+  <div class="toolbar-row">
+    <button class="toolbar-btn" onclick="resetAllTasks()">Reset all tasks</button>
+    <button class="toolbar-btn" id="copyBtn" onclick="copyTaskReport()">Copy task report</button>
+  </div>
+
+  <!-- MASTER TASKS -->
+  <div class="section-title"><span>Master Tasks</span><span class="section-badge master">Answer once — applies across multiple pages</span></div>
+  <p class="section-intro">These 20 tasks appear on more than one page. Answer each here and the same answer covers every page that needs it — no need to repeat yourself for each individual document.</p>
+  <div id="masterTasksContainer"></div>
+
+  <!-- PAGE-BY-PAGE -->
+  <div class="section-title" style="margin-top:52px"><span>Page-by-Page Tasks</span><span class="section-badge">Specific to each page</span></div>
+  <p class="section-intro">Tasks unique to individual pages. Expand any page to see and check off its tasks.</p>
+  <div id="pageTasksContainer"></div>
+
+</div>
+
+<footer>Prepared by Attain Digital &nbsp;·&nbsp; Wiltshire Energy Website Project &nbsp;·&nbsp; First Draft — June 2026</footer>
+
+<script>
+const MASTER_TASKS = [
+  { id:'phone-number',      category:'Brand & Contact',     task:'Confirm which phone number to use and where — 0333 577 6065 (seen in header) vs 02456 875621 (seen on current site footer). Which is primary?', pages:['Homepage','Contact','All CTAs'] },
+  { id:'mcs-cert',          category:'Accreditations',      task:'Confirm MCS certification is current and active — required for BUS applications and referenced on all service pages', pages:['Boiler Upgrade Scheme','Grants Overview','About Us','All service pages'] },
+  { id:'ozev-reg',          category:'Accreditations',      task:'Confirm OZEV approval status — required to claim EV charger grants on behalf of customers', pages:['EV Chargers','EV Homecharge Scheme','Grants Overview'] },
+  { id:'eco4-reg',          category:'Accreditations',      task:'Confirm ECO4 registration — are you registered to deliver ECO4 measures? Which measures?', pages:['ECO4 page','Grants Overview','Insulation'] },
+  { id:'gbis-reg',          category:'Accreditations',      task:'Confirm GBIS registration — are you registered to deliver GBIS measures? Which insulation types?', pages:['GBIS page','Grants Overview','Insulation'] },
+  { id:'accreditations',    category:'Accreditations',      task:'Provide the full list of accreditations and certifications — MCS, HETAS, GivEnergy, RECC, TrustMark, NICEIC, NAPIT, and any others', pages:['About Us','All service pages'] },
+  { id:'free-survey',       category:'Service Process',     task:'Confirm: is the site survey / design consultation free of charge, or a paid service? This affects how the process is described on every service page.', pages:['ASHP','GSHP','Solar PV','Home Landing','Design & Feasibility','FAQs'] },
+  { id:'warranty-terms',    category:'Service Process',     task:'Confirm warranty terms for each technology — manufacturer warranty period and your own workmanship guarantee (these may differ per technology)', pages:['ASHP','GSHP','Solar PV','Storage Heaters','FAQs','Home Services Overview','Home Landing'] },
+  { id:'install-timelines', category:'Service Process',     task:'Confirm typical installation timelines for each technology (e.g. ASHP: 1–2 days, solar: 1 day, GSHP: 3–5 days)', pages:['ASHP','FAQs','Home Landing','Home Services Overview','ECO4','GBIS'] },
+  { id:'inhouse-or-sub',    category:'Service Process',     task:'Confirm: do you use your own employed engineers exclusively, or are subcontractors used for any work? Customers ask this frequently.', pages:['About Us','FAQs'] },
+  { id:'company-story',     category:'Company',             task:'Provide the company founding story — when founded, how it has grown, what personally drives the team. This powers the About page and the Homepage About section.', pages:['About Us','Homepage'] },
+  { id:'company-stats',     category:'Company',             task:'Confirm key company statistics — total installations, years in business, team size, carbon saved (tonnes). Placeholder figures currently used.', pages:['About Us','Homepage'] },
+  { id:'team-profiles',     category:'Company',             task:'Provide team profiles for key members — name, role, background (2–3 sentences) and photos where possible', pages:['About Us'] },
+  { id:'reviews',           category:'Social Proof',        task:'Provide 4+ real Google reviews — customer name, date written, and review text. These power the Homepage testimonials section.', pages:['Homepage','Home Landing','Business Landing','Case Studies Overview'] },
+  { id:'case-studies',      category:'Social Proof',        task:'Provide at minimum 3 completed case studies — title, sector/property type, technology installed, challenge, solution, outcome, customer quote, and photos. Customer permissions required.', pages:['Case Studies Overview','ASHP','GSHP','Solar PV','Commercial Solar','Renewable Tech'] },
+  { id:'commercial-finance',category:'Commercial',          task:'Confirm commercial finance options available to business customers — asset finance, Power Purchase Agreements (PPAs), lease arrangements? Name any provider partners.', pages:['Business Landing','Commercial Solar','Renewable Tech','Funding Support'] },
+  { id:'commercial-sectors',category:'Commercial',          task:'Provide a list of sectors and business types you have delivered commercial projects for (e.g. agriculture, hospitality, manufacturing, education, retail)', pages:['Business Landing','Business Services Overview','Renewable Tech'] },
+  { id:'office-address',    category:'Contact & Operations',task:'Confirm full registered office address for display on the Contact page (currently showing Royal Wootton Bassett, Wiltshire only)', pages:['Contact'] },
+  { id:'office-hours',      category:'Contact & Operations',task:'Confirm office and phone hours — when can customers expect someone to answer the phone? What is the target response time for email/online enquiries?', pages:['Contact','FAQs'] },
+  { id:'crm-form',          category:'Contact & Operations',task:'Confirm preferred contact form fields and the CRM or lead management system the form should feed into', pages:['Contact'] },
+];
+
+const PAGES = [
+  { id:'homepage',           name:'Homepage',                        section:'core',       sectionLabel:'Core',                tasks:['Confirm which phone number to use — 0333 577 6065 (header) vs 02456 875621 (footer) → covered by Master Task','Provide 4 real Google reviews (customer name, date, review text) → covered by Master Task','Confirm Claire case study details — £1,608 saving, 4yr payback, 500kg CO₂/yr, Vaillant ASHP','Confirm company stats — founded 2015, 1,500 installations, 40,000 tonnes carbon saved → covered by Master Task'] },
+  { id:'home-landing',       name:'Home Landing',                    section:'core',       sectionLabel:'Core',                tasks:['Confirm finance provider and key terms for the finance section on this page','Confirm whether Solar Thermal and Water Source Heat Pumps are active residential services'] },
+  { id:'biz-landing',        name:'Business Landing',                section:'core',       sectionLabel:'Core',                tasks:['Provide a list of industries and business types worked with commercially → covered by Master Task','Provide 2–3 commercial customer testimonials (company/sector, location, system installed)'] },
+  { id:'home-services-ov',   name:'Home Services Overview',          section:'core',       sectionLabel:'Core',                tasks:['Confirm the full list of active home services — are these live: Battery Storage, Solar Thermal, Water Source Heat Pump, Underfloor Heating, MVHR, Servicing & Repairs?'] },
+  { id:'biz-services-ov',    name:'Business Services Overview',      section:'core',       sectionLabel:'Core',                tasks:['Provide at least one commercial case study (sector, system, challenge, outcome, customer quote) → covered by Master Task','Confirm the full list of commercial services currently offered'] },
+  { id:'ashp',               name:'Air Source Heat Pumps',           section:'services-h', sectionLabel:'Services — Home',     tasks:['Confirm which ASHP brands you currently install and any preferred/accredited manufacturers','Provide an ASHP homeowner case study, or confirm the Claire case study (Homepage) can be referenced here','Do you currently offer servicing plans or maintenance packages for heat pump customers?'] },
+  { id:'gshp',               name:'Ground Source Heat Pumps',        section:'services-h', sectionLabel:'Services — Home',     tasks:['Confirm: horizontal ground loops, vertical boreholes, or both?','Confirm your process for garden reinstatement after ground loop installation','Confirm GSHP brands installed (e.g. Nibe, Vaillant, Ecoforest, Mastertherm)','Provide a homeowner GSHP case study'] },
+  { id:'solar-pv',           name:'Solar PV',                        section:'services-h', sectionLabel:'Services — Home',     tasks:['Confirm solar panel and inverter brands you currently install','Do you offer a monitoring app or portal for customers? If so, which platform?','Confirm: link to or include Battery Storage on this page, or create a separate Battery Storage page?'] },
+  { id:'ev-chargers',        name:'EV Chargers',                     section:'services-h', sectionLabel:'Services — Home',     tasks:['Confirm EV charger brands installed (e.g. Ohme, Zappi, Andersen, Hypervolt, Easee)','Provide an EV charger customer case study or testimonial'] },
+  { id:'storage-heaters',    name:'Storage Heaters',                 section:'services-h', sectionLabel:'Services — Home',     tasks:['Confirm storage heater brands supplied and installed (e.g. Elnur, Dimplex, Electrorad, Haverland)','Are storage heaters a primary recommendation or an alternative when heat pumps aren\'t suitable? This affects the page tone.'] },
+  { id:'insulation',         name:'Insulation',                      section:'services-h', sectionLabel:'Services — Home',     tasks:['Confirm which insulation types you offer — loft, cavity wall, solid wall (internal/external), underfloor, other','Provide insulation customer testimonials or case study'] },
+  { id:'renewable-tech',     name:'Renewable Technology Services',   section:'services-b', sectionLabel:'Services — Business', tasks:['Confirm the full list of commercial renewable technology services offered','Do you have commercial case studies to reference? → covered by Master Task'] },
+  { id:'commercial-solar',   name:'Commercial Solar PV',             section:'services-b', sectionLabel:'Services — Business', tasks:['Confirm typical commercial system sizes installed (smallest to largest in kWp)','Confirm typical commercial solar payback period range','Confirm: do you offer commercial battery storage? Products and capacity ranges?','Provide a commercial solar case study → covered by Master Task'] },
+  { id:'design-feasibility', name:'Design & Feasibility',            section:'services-b', sectionLabel:'Services — Business', tasks:['Confirm: paid standalone service, free initial assessment, or both?','Confirm typical turnaround from survey to report delivery','Provide a case study where a feasibility study led to a successful commercial installation → covered by Master Task'] },
+  { id:'funding-support',    name:'Funding Support',                 section:'services-b', sectionLabel:'Services — Business', tasks:['Confirm the full list of commercial grant schemes and finance products you currently support → covered by Master Task','Confirm: is funding support included in project management, or a standalone service?'] },
+  { id:'grants-overview',    name:'Grants Overview',                 section:'grants',     sectionLabel:'Grants',              tasks:['Confirm any other commercial funding schemes you support (e.g. UKSPF, rural payments, Countryside Stewardship)','Confirm current availability of OZEV EV Chargepoint Grant for homeowners → covered by Master Task'] },
+  { id:'bus',                name:'Boiler Upgrade Scheme',           section:'grants',     sectionLabel:'Grants',              tasks:['Confirm current BUS grant values — these change and the page must always reflect current figures','Provide customer examples of successful BUS applications for social proof'] },
+  { id:'gbis',               name:'Great British Insulation Scheme', section:'grants',     sectionLabel:'Grants',              tasks:['Confirm whether GBIS is currently accepting new applications in your area — any regional restrictions or waiting lists?'] },
+  { id:'eco4',               name:'Energy Company Obligation (ECO4)',section:'grants',     sectionLabel:'Grants',              tasks:['Confirm which specific measures you deliver under ECO4','Do you offer ECO4 Flex (local authority referral route for non-benefit households)?'] },
+  { id:'ev-homecharge',      name:'EV Homecharge Scheme',            section:'grants',     sectionLabel:'Grants',              tasks:['Confirm: do you offer the Workplace Charging Scheme to businesses?','Confirm current grant amounts for EV Chargepoint Grant and Workplace Charging Scheme'] },
+  { id:'warm-well',          name:'Warm and Well',                   section:'grants',     sectionLabel:'Grants',              tasks:['Confirm your relationship with Warm and Well — registered delivery partner, approved contractor, or referral only?','Confirm current scheme eligibility criteria'] },
+  { id:'barclays',           name:'Barclays Greener Home Reward',    section:'grants',     sectionLabel:'Grants',              tasks:['Verify current reward amounts and qualifying improvements directly with Barclays before publishing — details change frequently','Confirm: dedicated page or include as a section within Grants Overview?'] },
+  { id:'about',              name:'About Us',                        section:'about',      sectionLabel:'About',               tasks:['Confirm whether you service systems installed by other companies — customers ask this, honest answer builds trust'] },
+  { id:'case-studies',       name:'Case Studies Overview',           section:'about',      sectionLabel:'About',               tasks:['Confirm customer permission to use name, location and testimonial on the website before publishing','Provide project photography for each case study (completed install, before/after, property photos)'] },
+  { id:'join-team',          name:'Join Our Team',                   section:'about',      sectionLabel:'About',               tasks:['Provide employee offering details — salary ranges, benefits, training, development pathways, culture','Provide current vacancies (or confirm focus on speculative applications) and confirm recruitment email address','Provide 2–3 short quotes from existing team members about working at Wiltshire Energy'] },
+  { id:'contact',            name:'Contact',                         section:'core',       sectionLabel:'Core',                tasks:['Confirm full registered office address → covered by Master Task','Confirm office/phone hours → covered by Master Task','Confirm preferred contact form fields and CRM/lead system → covered by Master Task'] },
+  { id:'faqs',               name:'FAQs',                            section:'core',       sectionLabel:'Core',                tasks:['Provide any additional FAQs you regularly receive that aren\'t already covered in the document','Answer [CLIENT TO CONFIRM] placeholders not covered by Master Tasks — e.g. EV grant current status'] },
+];
+
+const SECTION_CLS = { core:'sl-core', 'services-h':'sl-services-h', 'services-b':'sl-services-b', grants:'sl-grants', about:'sl-about' };
+
+const getMasterDone = id  => localStorage.getItem('we-master-' + id) === '1';
+const setMasterDone = (id,v) => localStorage.setItem('we-master-' + id, v ? '1' : '0');
+const getPageDone   = (pid,ti) => localStorage.getItem(`we-task-${pid}-${ti}`) === '1';
+const setPageDone   = (pid,ti,v) => localStorage.setItem(`we-task-${pid}-${ti}`, v ? '1' : '0');
+
+function buildMasterTasks() {
+  const cats = {};
+  MASTER_TASKS.forEach(t => { if (!cats[t.category]) cats[t.category]=[];  cats[t.category].push(t); });
+  const container = document.getElementById('masterTasksContainer');
+  container.innerHTML = '';
+  Object.entries(cats).forEach(([cat, tasks]) => {
+    const label = document.createElement('div');
+    label.style.cssText = 'font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:#8a9bb0;margin:20px 0 8px;';
+    label.textContent = cat;
+    container.appendChild(label);
+    tasks.forEach(t => {
+      const done = getMasterDone(t.id);
+      const div = document.createElement('div');
+      div.className = `task-card${done?' done':''}`;
+      div.dataset.id = t.id;
+      div.innerHTML = `
+        <div class="task-card-header">
+          <input type="checkbox" class="task-cb" ${done?'checked':''} onchange="handleMasterCheck(this,'${t.id}')">
+          <div class="task-card-body">
+            <div class="task-card-title">${t.task}</div>
+            <div class="task-pages">${t.pages.map(p=>`<span class="task-page-tag">${p}</span>`).join('')}</div>
+          </div>
+        </div>`;
+      container.appendChild(div);
+    });
+  });
+}
+
+function buildPageTasks() {
+  const container = document.getElementById('pageTasksContainer');
+  container.innerHTML = '';
+  PAGES.forEach(page => {
+    const doneCount = page.tasks.filter((_,ti) => getPageDone(page.id, ti)).length;
+    const div = document.createElement('div');
+    div.className = 'page-group';
+    div.dataset.id = page.id;
+    const doneTag = doneCount === page.tasks.length
+      ? `<span class="page-group-done">All done ✓</span>`
+      : `<span class="page-group-count" id="pgc-${page.id}">${doneCount}/${page.tasks.length}</span>`;
+    div.innerHTML = `
+      <div class="page-group-header" onclick="toggleGroup('${page.id}')">
+        <span class="section-label ${SECTION_CLS[page.section]}">${page.sectionLabel}</span>
+        <span class="page-group-name">${page.name}</span>
+        ${doneTag}
+        <span class="pg-expand">▶</span>
+      </div>
+      <div class="page-group-body">
+        <ul class="page-task-list" id="ptl-${page.id}">
+          ${page.tasks.map((t,ti) => {
+            const done = getPageDone(page.id, ti);
+            return `<li class="page-task-item${done?' done':''}" data-pid="${page.id}" data-ti="${ti}">
+              <input type="checkbox" class="task-cb" ${done?'checked':''} onchange="handlePageCheck(this)">
+              <span>${t}</span>
+            </li>`;
+          }).join('')}
+        </ul>
+      </div>`;
+    container.appendChild(div);
+  });
+}
+
+function toggleGroup(id) {
+  document.querySelector(`.page-group[data-id="${id}"]`).classList.toggle('open');
+}
+
+function handleMasterCheck(cb, id) {
+  const done = cb.checked;
+  setMasterDone(id, done);
+  cb.closest('.task-card').classList.toggle('done', done);
+  updateOverall();
+}
+
+function handlePageCheck(cb) {
+  const li  = cb.closest('[data-pid]');
+  const pid = li.dataset.pid;
+  const ti  = parseInt(li.dataset.ti);
+  const done = cb.checked;
+  setPageDone(pid, ti, done);
+  li.classList.toggle('done', done);
+  const page = PAGES.find(p=>p.id===pid);
+  const doneCount = page.tasks.filter((_,i) => getPageDone(pid, i)).length;
+  const countEl = document.getElementById(`pgc-${pid}`);
+  if (countEl) {
+    if (doneCount === page.tasks.length) {
+      countEl.className = 'page-group-done'; countEl.textContent = 'All done ✓';
+    } else {
+      countEl.className = 'page-group-count'; countEl.textContent = `${doneCount}/${page.tasks.length}`;
+    }
+  }
+  updateOverall();
+}
+
+function updateOverall() {
+  const masterDone = MASTER_TASKS.filter(t => getMasterDone(t.id)).length;
+  const pageDone   = PAGES.reduce((sum,p) => sum + p.tasks.filter((_,ti) => getPageDone(p.id,ti)).length, 0);
+  const total      = MASTER_TASKS.length + PAGES.reduce((s,p)=>s+p.tasks.length,0);
+  const totalDone  = masterDone + pageDone;
+  const pct        = Math.round((totalDone / total) * 100);
+  document.getElementById('masterDone').textContent = masterDone + '/' + MASTER_TASKS.length;
+  document.getElementById('pageDone').textContent   = pageDone;
+  document.getElementById('totalDone').textContent  = totalDone + '/' + total;
+  document.getElementById('totalPct').textContent   = pct + '%';
+  document.getElementById('totalBar').style.width   = pct + '%';
+}
+
+function resetAllTasks() {
+  if (!confirm('Reset all task checkboxes on this page?')) return;
+  MASTER_TASKS.forEach(t => localStorage.removeItem('we-master-' + t.id));
+  PAGES.forEach(p => p.tasks.forEach((_,ti) => localStorage.removeItem(`we-task-${p.id}-${ti}`)));
+  buildMasterTasks(); buildPageTasks(); updateOverall();
+}
+
+function copyTaskReport() {
+  const lines = ['Wiltshire Energy — Task Progress Report', new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}), '', '=== MASTER TASKS ==='];
+  const cats = {};
+  MASTER_TASKS.forEach(t => { if (!cats[t.category]) cats[t.category]=[]; cats[t.category].push(t); });
+  Object.entries(cats).forEach(([cat,tasks]) => {
+    lines.push('\n' + cat);
+    tasks.forEach(t => lines.push(`  [${getMasterDone(t.id)?'x':' '}] ${t.task.substring(0,80)}...`));
+  });
+  lines.push('\n=== PAGE TASKS ===');
+  PAGES.forEach(p => {
+    const done = p.tasks.filter((_,ti)=>getPageDone(p.id,ti)).length;
+    lines.push(`\n${p.name} (${done}/${p.tasks.length})`);
+    p.tasks.forEach((t,ti) => lines.push(`  [${getPageDone(p.id,ti)?'x':' '}] ${t.substring(0,80)}`));
+  });
+  const total = MASTER_TASKS.length + PAGES.reduce((s,p)=>s+p.tasks.length,0);
+  const done  = MASTER_TASKS.filter(t=>getMasterDone(t.id)).length + PAGES.reduce((s,p)=>s+p.tasks.filter((_,ti)=>getPageDone(p.id,ti)).length,0);
+  lines.push(`\nTotal: ${done}/${total} tasks addressed`);
+  navigator.clipboard.writeText(lines.join('\n')).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✓ Copied!'; btn.classList.add('copy-success');
+    setTimeout(()=>{ btn.textContent='Copy task report'; btn.classList.remove('copy-success'); }, 2000);
+  });
+}
+
+buildMasterTasks();
+buildPageTasks();
+updateOverall();
+</script>
+</body>
+</html>

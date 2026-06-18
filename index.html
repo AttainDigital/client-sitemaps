@@ -6,153 +6,106 @@
 <title>Wiltshire Energy — Website Strategy & Content</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #f4f6f9; color: #1a2332; min-height: 100vh;
-  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f4f6f9; color: #1a2332; min-height: 100vh; }
 
   header { background: #1a3a5c; color: #fff; padding: 40px 48px 36px; }
-  .header-inner { max-width: 960px; margin: 0 auto; }
-  .badge {
-    display: inline-block; background: rgba(255,255,255,0.15);
-    color: rgba(255,255,255,0.85); font-size: 0.75rem; font-weight: 600;
-    letter-spacing: 0.8px; text-transform: uppercase;
-    padding: 4px 12px; border-radius: 20px; margin-bottom: 16px;
-  }
+  .header-inner { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
+  .header-text { flex: 1; }
+  .badge { display: inline-block; background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.85); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; }
   header h1 { font-size: 1.9rem; font-weight: 700; margin-bottom: 8px; line-height: 1.2; }
   header p { font-size: 0.95rem; color: rgba(255,255,255,0.65); max-width: 540px; line-height: 1.6; }
+  .header-nav { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; padding-top: 8px; flex-shrink: 0; }
+  .nav-link { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: #fff; text-decoration: none; font-size: 0.82rem; font-weight: 600; padding: 8px 16px; border-radius: 7px; border: 1px solid rgba(255,255,255,0.2); transition: background 0.15s; white-space: nowrap; }
+  .nav-link:hover { background: rgba(255,255,255,0.22); }
+  .nav-link.active { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.4); }
 
   .main { max-width: 960px; margin: 0 auto; padding: 48px 48px 80px; }
-  h2 { font-size: 1.05rem; font-weight: 700; color: #1a3a5c; margin-bottom: 20px; letter-spacing: 0.1px; }
+  h2 { font-size: 1.05rem; font-weight: 700; color: #1a3a5c; margin-bottom: 20px; }
 
-  /* SITEMAP CARDS */
   .sitemap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 52px; }
-  .sitemap-card {
-    background: #fff; border: 1px solid #dde4ed; border-radius: 12px;
-    padding: 28px; display: flex; flex-direction: column;
-    transition: box-shadow 0.15s, transform 0.15s;
-  }
+  .sitemap-card { background: #fff; border: 1px solid #dde4ed; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; transition: box-shadow 0.15s, transform 0.15s; }
   .sitemap-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); transform: translateY(-2px); }
-  .card-tag {
-    display: inline-block; font-size: 0.7rem; font-weight: 700;
-    letter-spacing: 0.8px; text-transform: uppercase;
-    padding: 3px 10px; border-radius: 4px; margin-bottom: 14px;
-  }
+  .card-tag { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; margin-bottom: 14px; }
   .tag-wiltshire { background: #dce8f5; color: #1a3a5c; }
   .tag-cotswold  { background: #d8f3dc; color: #1b4332; }
   .sitemap-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
   .sitemap-card p  { font-size: 0.85rem; color: #5a6a7d; line-height: 1.55; flex: 1; margin-bottom: 20px; }
-  .card-meta { display: flex; gap: 16px; margin-bottom: 20px; }
+  .card-meta { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
   .meta-pill { font-size: 0.75rem; color: #5a6a7d; background: #f1f5f9; padding: 4px 10px; border-radius: 20px; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 11px 20px; border-radius: 7px; font-size: 0.85rem;
-    font-weight: 600; text-decoration: none; transition: background 0.15s;
-    align-self: flex-start;
-  }
-  .btn-navy { background: #1a3a5c; color: #fff; }
-  .btn-navy:hover { background: #2a5282; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 7px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: background 0.15s; align-self: flex-start; }
+  .btn-navy  { background: #1a3a5c; color: #fff; }
+  .btn-navy:hover  { background: #2a5282; }
   .btn-green { background: #1b4332; color: #fff; }
   .btn-green:hover { background: #2d6a4f; }
 
-  /* CONTENT SECTION */
   .content-section { background: #fff; border: 1px solid #dde4ed; border-radius: 12px; padding: 32px; margin-bottom: 52px; }
   .content-intro { font-size: 0.9rem; color: #5a6a7d; line-height: 1.6; margin-bottom: 24px; max-width: 680px; }
 
-  /* PROGRESS BAR */
   .progress-wrap { margin-bottom: 28px; }
   .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
   .progress-label { font-size: 0.82rem; font-weight: 600; color: #1a3a5c; }
   .progress-count { font-size: 0.82rem; color: #5a6a7d; }
   .progress-bar-bg { background: #edf0f5; border-radius: 8px; height: 10px; overflow: hidden; }
-  .progress-bar-fill {
-    height: 100%; border-radius: 8px; background: #1b4332;
-    transition: width 0.4s ease; width: 0%;
-  }
+  .progress-bar-fill { height: 100%; border-radius: 8px; background: #1b4332; transition: width 0.4s ease; width: 0%; }
   .progress-pills { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
-  .ppill {
-    font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 20px;
-  }
-  .ppill-toaction  { background: #f1f5f9; color: #64748b; }
-  .ppill-inreview  { background: #dbeafe; color: #1d4ed8; }
+  .ppill { font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+  .ppill-toaction   { background: #f1f5f9; color: #64748b; }
+  .ppill-inreview   { background: #dbeafe; color: #1d4ed8; }
   .ppill-inprogress { background: #fef3c7; color: #92400e; }
-  .ppill-approved  { background: #dcfce7; color: #166534; }
+  .ppill-approved   { background: #dcfce7; color: #166534; }
 
-  /* TABLE */
   .table-toolbar { display: flex; justify-content: flex-end; margin-bottom: 14px; gap: 10px; }
-  .toolbar-btn {
-    background: #f1f5f9; border: 1px solid #dde4ed; border-radius: 6px;
-    padding: 7px 14px; font-size: 0.78rem; font-weight: 600; cursor: pointer;
-    color: #1a3a5c; transition: background 0.15s;
-  }
+  .toolbar-btn { background: #f1f5f9; border: 1px solid #dde4ed; border-radius: 6px; padding: 7px 14px; font-size: 0.78rem; font-weight: 600; cursor: pointer; color: #1a3a5c; transition: background 0.15s; }
   .toolbar-btn:hover { background: #e2e8f0; }
   .toolbar-btn.copy-success { background: #dcfce7; color: #166534; border-color: #86efac; }
 
   .pages-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
-  .pages-table th {
-    text-align: left; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.6px;
-    text-transform: uppercase; color: #8a9bb0; padding: 0 10px 10px 0;
-    border-bottom: 1px solid #edf0f5;
-  }
+  .pages-table th { text-align: left; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #8a9bb0; padding: 0 10px 10px 0; border-bottom: 1px solid #edf0f5; }
   .pages-table th:last-child { text-align: right; padding-right: 0; }
-  .pages-table td { padding: 9px 10px 9px 0; border-bottom: 1px solid #f3f5f8; color: #2d3748; vertical-align: middle; }
-  .pages-table tr:last-child td { border-bottom: none; }
-  .page-name { font-weight: 600; }
+  .page-row td { padding: 10px 10px 10px 0; border-bottom: 1px solid #f3f5f8; color: #2d3748; vertical-align: middle; cursor: pointer; }
+  .page-row:hover td { background: #fafbfd; }
+  .page-row.expanded td { border-bottom: none; background: #fafbfd; }
+  .page-name { font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .expand-icon { font-size: 0.65rem; color: #94a3b8; transition: transform 0.2s; display: inline-block; }
+  .page-row.expanded .expand-icon { transform: rotate(90deg); }
 
-  .section-label {
-    display: inline-block; font-size: 0.7rem; font-weight: 600;
-    padding: 2px 8px; border-radius: 3px; white-space: nowrap;
-  }
+  .task-row td { padding: 0; border-bottom: 1px solid #f3f5f8; }
+  .task-row.hidden { display: none; }
+  .task-panel { background: #f8fafc; border-left: 3px solid #e2e8f0; padding: 14px 16px 14px 20px; }
+  .task-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .task-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.8rem; color: #374151; line-height: 1.4; }
+  .task-cb { margin-top: 1px; width: 15px; height: 15px; flex-shrink: 0; cursor: pointer; accent-color: #1a3a5c; }
+  .task-item.done .task-text { text-decoration: line-through; color: #94a3b8; }
+  .task-done-count { font-size: 0.72rem; color: #64748b; margin-top: 8px; padding-top: 8px; border-top: 1px solid #e9edf2; }
+
+  .section-label { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 2px 8px; border-radius: 3px; white-space: nowrap; }
   .sl-core       { background: #e8f0fe; color: #1a56db; }
   .sl-services-h { background: #e9f5db; color: #1b4332; }
   .sl-services-b { background: #ddeef8; color: #0d3d56; }
   .sl-grants     { background: #fff3cd; color: #664d03; }
   .sl-about      { background: #f0e6ff; color: #3d1a78; }
+  .review-count { display: inline-block; font-size: 0.72rem; font-weight: 600; background: #fff3e0; color: #e65100; padding: 2px 8px; border-radius: 3px; cursor: pointer; }
 
-  .review-count {
-    display: inline-block; font-size: 0.72rem; font-weight: 600;
-    background: #fff3e0; color: #e65100; padding: 2px 8px; border-radius: 3px;
-  }
-
-  /* STATUS DROPDOWN */
-  .status-select {
-    appearance: none; -webkit-appearance: none;
-    border: 1.5px solid #e2e8f0; border-radius: 6px;
-    padding: 5px 28px 5px 10px; font-size: 0.78rem; font-weight: 600;
-    cursor: pointer; outline: none; min-width: 130px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a9bb0'/%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: right 10px center;
-    transition: border-color 0.15s;
-  }
+  .status-select { appearance: none; -webkit-appearance: none; border: 1.5px solid #e2e8f0; border-radius: 6px; padding: 5px 28px 5px 10px; font-size: 0.78rem; font-weight: 600; cursor: pointer; outline: none; min-width: 130px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a9bb0'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; transition: border-color 0.15s; }
   .status-select:focus { border-color: #1a3a5c; }
-
   .status-select.s-toaction   { background-color: #f8fafc; color: #475569; border-color: #cbd5e1; }
   .status-select.s-inreview   { background-color: #eff6ff; color: #1d4ed8; border-color: #93c5fd; }
   .status-select.s-inprogress { background-color: #fffbeb; color: #92400e; border-color: #fcd34d; }
   .status-select.s-approved   { background-color: #f0fdf4; color: #166534; border-color: #86efac; }
 
-  /* NEXT STEPS */
   .steps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .step-card {
-    background: #fff; border: 1px solid #dde4ed; border-radius: 10px;
-    padding: 22px 24px; display: flex; gap: 16px; align-items: flex-start;
-  }
-  .step-num {
-    width: 32px; height: 32px; border-radius: 50%; background: #1a3a5c;
-    color: #fff; font-size: 0.8rem; font-weight: 700;
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
+  .step-card { background: #fff; border: 1px solid #dde4ed; border-radius: 10px; padding: 22px 24px; display: flex; gap: 16px; align-items: flex-start; }
+  .step-num { width: 32px; height: 32px; border-radius: 50%; background: #1a3a5c; color: #fff; font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .step-card h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 4px; }
   .step-card p  { font-size: 0.8rem; color: #5a6a7d; line-height: 1.5; }
 
-  footer {
-    text-align: center; padding: 24px;
-    font-size: 0.78rem; color: #aab; border-top: 1px solid #e8ecf0;
-  }
+  footer { text-align: center; padding: 24px; font-size: 0.78rem; color: #aab; border-top: 1px solid #e8ecf0; }
 
   @media (max-width: 680px) {
     .sitemap-grid, .steps-grid { grid-template-columns: 1fr; }
     header { padding: 28px 24px; }
+    .header-inner { flex-direction: column; }
+    .header-nav { flex-direction: row; align-items: flex-start; }
     .main { padding: 32px 24px 60px; }
   }
 </style>
@@ -161,68 +114,56 @@
 
 <header>
   <div class="header-inner">
-    <div class="badge">Prepared by Attain Digital</div>
-    <h1>Wiltshire Energy — Website Strategy & Content</h1>
-    <p>First draft of the full website content and visual site architecture. 27 pages written, SEO optimised, and structured for review.</p>
+    <div class="header-text">
+      <div class="badge">Prepared by Attain Digital</div>
+      <h1>Wiltshire Energy — Website Strategy & Content</h1>
+      <p>First draft of the full website content and visual site architecture. 27 pages written, SEO optimised, and structured for review.</p>
+    </div>
+    <div class="header-nav">
+      <a href="index.html" class="nav-link active">📋 Overview</a>
+      <a href="tasks.html" class="nav-link">✅ All Tasks</a>
+    </div>
   </div>
 </header>
 
 <div class="main">
 
-  <!-- SITEMAPS -->
   <h2>Visual Sitemaps</h2>
   <div class="sitemap-grid">
-
     <div class="sitemap-card">
       <span class="card-tag tag-wiltshire">Wiltshire Energy</span>
       <h3>Wiltshire Energy Sitemap</h3>
       <p>Proposed site architecture for the new Wiltshire Energy website — 39 pages across Home, Business, Services, Grants, About, Case Studies and more.</p>
-      <div class="card-meta">
-        <span class="meta-pill">39 pages</span>
-        <span class="meta-pill">9 sections</span>
-        <span class="meta-pill">PDF export</span>
-      </div>
+      <div class="card-meta"><span class="meta-pill">39 pages</span><span class="meta-pill">9 sections</span><span class="meta-pill">PDF export</span></div>
       <a href="wiltshire-energy-sitemap.html" class="btn btn-navy">View Sitemap →</a>
     </div>
-
     <div class="sitemap-card">
       <span class="card-tag tag-cotswold">Reference Site</span>
       <h3>Cotswold Energy Sitemap</h3>
       <p>Sitemap of the live Cotswold Energy website — provided as a structural reference and benchmark for the Wiltshire Energy build.</p>
-      <div class="card-meta">
-        <span class="meta-pill">46 pages</span>
-        <span class="meta-pill">9 sections</span>
-        <span class="meta-pill">PDF export</span>
-      </div>
+      <div class="card-meta"><span class="meta-pill">46 pages</span><span class="meta-pill">9 sections</span><span class="meta-pill">PDF export</span></div>
       <a href="cotswold-energy-sitemap.html" class="btn btn-green">View Sitemap →</a>
     </div>
-
   </div>
 
-  <!-- CONTENT PAGES -->
   <h2>Website Content — First Draft (27 Pages)</h2>
   <div class="content-section">
+    <p class="content-intro">All 27 pages written and SEO optimised. Click any row to expand its review tasks. Update status as you work through each page — saved automatically in your browser. Head to <a href="tasks.html" style="color:#1a3a5c;font-weight:600;">All Tasks</a> to see every task consolidated in one place.</p>
 
-    <p class="content-intro">All 27 pages have been written and SEO optimised. Review each page using the Word documents shared separately. Use the status dropdowns below to track your progress — your selections are saved automatically in your browser.</p>
-
-    <!-- PROGRESS BAR -->
     <div class="progress-wrap">
       <div class="progress-header">
         <span class="progress-label">Review progress</span>
         <span class="progress-count" id="progressCount">0 of 27 approved</span>
       </div>
-      <div class="progress-bar-bg">
-        <div class="progress-bar-fill" id="progressFill"></div>
-      </div>
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
       <div class="progress-pills">
-        <span class="ppill ppill-toaction" id="pill-toaction">— To Action</span>
-        <span class="ppill ppill-inreview" id="pill-inreview">— In Review</span>
+        <span class="ppill ppill-toaction"   id="pill-toaction">— To Action</span>
+        <span class="ppill ppill-inreview"   id="pill-inreview">— In Review</span>
         <span class="ppill ppill-inprogress" id="pill-inprogress">— In Progress</span>
-        <span class="ppill ppill-approved" id="pill-approved">— Approved</span>
+        <span class="ppill ppill-approved"   id="pill-approved">— Approved</span>
       </div>
     </div>
 
-    <!-- TOOLBAR -->
     <div class="table-toolbar">
       <button class="toolbar-btn" onclick="resetAll()">Reset all</button>
       <button class="toolbar-btn" id="copyBtn" onclick="copyReport()">Copy status report</button>
@@ -233,148 +174,142 @@
         <tr>
           <th>Page</th>
           <th>Section</th>
-          <th>Review tasks</th>
+          <th>Tasks</th>
           <th style="text-align:right">Status</th>
         </tr>
       </thead>
-      <tbody id="pagesTableBody">
-      </tbody>
+      <tbody id="pagesTableBody"></tbody>
     </table>
   </div>
 
-  <!-- NEXT STEPS -->
   <h2>What Happens Next</h2>
   <div class="steps-grid">
-    <div class="step-card">
-      <div class="step-num">1</div>
-      <div>
-        <h4>Review the content</h4>
-        <p>Work through each Word document. Where you see 🟧 CLIENT REVIEW REQUIRED or [CLIENT TO CONFIRM], add your answers directly into the document.</p>
-      </div>
-    </div>
-    <div class="step-card">
-      <div class="step-num">2</div>
-      <div>
-        <h4>Update your status</h4>
-        <p>As you work through each page, update its status above — To Action → In Review → In Progress → Approved. Your progress saves automatically.</p>
-      </div>
-    </div>
-    <div class="step-card">
-      <div class="step-num">3</div>
-      <div>
-        <h4>Send back your changes</h4>
-        <p>Return the reviewed Word documents with your amendments. Use "Copy status report" to send a quick summary of where things stand.</p>
-      </div>
-    </div>
-    <div class="step-card">
-      <div class="step-num">4</div>
-      <div>
-        <h4>Design begins</h4>
-        <p>Once content is confirmed, the designer builds each page from your approved copy. Content-first means no redesigns as copy changes.</p>
-      </div>
-    </div>
+    <div class="step-card"><div class="step-num">1</div><div><h4>Review the content</h4><p>Work through each Word document. Where you see 🟧 CLIENT REVIEW REQUIRED or [CLIENT TO CONFIRM], add your answers directly into the document.</p></div></div>
+    <div class="step-card"><div class="step-num">2</div><div><h4>Update your status</h4><p>As you work through each page, update its status — To Action → In Review → In Progress → Approved. Click any row to see its specific tasks.</p></div></div>
+    <div class="step-card"><div class="step-num">3</div><div><h4>Send back your changes</h4><p>Return the reviewed Word documents with your amendments. Use "Copy status report" to send a quick summary of where things stand.</p></div></div>
+    <div class="step-card"><div class="step-num">4</div><div><h4>Design begins</h4><p>Once content is confirmed, the designer builds each page from your approved copy. Content-first means no redesigns as copy changes.</p></div></div>
   </div>
 
 </div>
 
-<footer>
-  Prepared by Attain Digital &nbsp;·&nbsp; Wiltshire Energy Website Project &nbsp;·&nbsp; First Draft — June 2026
-</footer>
+<footer>Prepared by Attain Digital &nbsp;·&nbsp; Wiltshire Energy Website Project &nbsp;·&nbsp; First Draft — June 2026</footer>
 
 <script>
 const PAGES = [
-  { id: 'homepage',            name: 'Homepage',                        section: 'core',       sectionLabel: 'Core',                tasks: 4 },
-  { id: 'home-landing',        name: 'Home Landing',                    section: 'core',       sectionLabel: 'Core',                tasks: 3 },
-  { id: 'business-landing',    name: 'Business Landing',                section: 'core',       sectionLabel: 'Core',                tasks: 3 },
-  { id: 'home-services-ov',    name: 'Home Services Overview',          section: 'core',       sectionLabel: 'Core',                tasks: 3 },
-  { id: 'biz-services-ov',     name: 'Business Services Overview',      section: 'core',       sectionLabel: 'Core',                tasks: 3 },
-  { id: 'ashp',                name: 'Air Source Heat Pumps',           section: 'services-h', sectionLabel: 'Services — Home',     tasks: 5 },
-  { id: 'gshp',                name: 'Ground Source Heat Pumps',        section: 'services-h', sectionLabel: 'Services — Home',     tasks: 4 },
-  { id: 'solar-pv',            name: 'Solar PV',                        section: 'services-h', sectionLabel: 'Services — Home',     tasks: 4 },
-  { id: 'ev-chargers',         name: 'EV Chargers',                     section: 'services-h', sectionLabel: 'Services — Home',     tasks: 4 },
-  { id: 'storage-heaters',     name: 'Storage Heaters',                 section: 'services-h', sectionLabel: 'Services — Home',     tasks: 3 },
-  { id: 'insulation',          name: 'Insulation',                      section: 'services-h', sectionLabel: 'Services — Home',     tasks: 3 },
-  { id: 'renewable-tech',      name: 'Renewable Technology Services',   section: 'services-b', sectionLabel: 'Services — Business', tasks: 3 },
-  { id: 'commercial-solar',    name: 'Commercial Solar PV',             section: 'services-b', sectionLabel: 'Services — Business', tasks: 5 },
-  { id: 'design-feasibility',  name: 'Design & Feasibility',            section: 'services-b', sectionLabel: 'Services — Business', tasks: 3 },
-  { id: 'funding-support',     name: 'Funding Support',                 section: 'services-b', sectionLabel: 'Services — Business', tasks: 3 },
-  { id: 'grants-overview',     name: 'Grants Overview',                 section: 'grants',     sectionLabel: 'Grants',              tasks: 3 },
-  { id: 'bus',                 name: 'Boiler Upgrade Scheme',           section: 'grants',     sectionLabel: 'Grants',              tasks: 3 },
-  { id: 'gbis',                name: 'Great British Insulation Scheme', section: 'grants',     sectionLabel: 'Grants',              tasks: 3 },
-  { id: 'eco4',                name: 'Energy Company Obligation (ECO4)',section: 'grants',     sectionLabel: 'Grants',              tasks: 3 },
-  { id: 'ev-homecharge',       name: 'EV Homecharge Scheme',            section: 'grants',     sectionLabel: 'Grants',              tasks: 3 },
-  { id: 'warm-well',           name: 'Warm and Well',                   section: 'grants',     sectionLabel: 'Grants',              tasks: 2 },
-  { id: 'barclays',            name: 'Barclays Greener Home Reward',    section: 'grants',     sectionLabel: 'Grants',              tasks: 2 },
-  { id: 'about',               name: 'About Us',                        section: 'about',      sectionLabel: 'About',               tasks: 5 },
-  { id: 'case-studies',        name: 'Case Studies Overview',           section: 'about',      sectionLabel: 'About',               tasks: 4 },
-  { id: 'join-team',           name: 'Join Our Team',                   section: 'about',      sectionLabel: 'About',               tasks: 3 },
-  { id: 'contact',             name: 'Contact',                         section: 'core',       sectionLabel: 'Core',                tasks: 4 },
-  { id: 'faqs',                name: 'FAQs',                            section: 'core',       sectionLabel: 'Core',                tasks: 3 },
+  { id:'homepage',           name:'Homepage',                        section:'core',       sectionLabel:'Core',                tasks:['Confirm which phone number to use — 0333 577 6065 (header) vs 02456 875621 (seen on current site footer)','Provide 4 real Google reviews (customer name, date, review text)','Confirm Claire case study details — £1,608 saving, 4yr payback, 500kg CO₂/yr, Vaillant ASHP','Confirm company stats — founded 2015, 1,500 installations, 40,000 tonnes carbon saved'] },
+  { id:'home-landing',       name:'Home Landing',                    section:'core',       sectionLabel:'Core',                tasks:['Confirm finance provider and key terms for the finance section','Provide 2–3 homeowner testimonials (name, town, system installed)','Confirm whether Solar Thermal and Water Source Heat Pumps are active residential services'] },
+  { id:'biz-landing',        name:'Business Landing',                section:'core',       sectionLabel:'Core',                tasks:['Provide a list of industries and business types you have worked with commercially','Provide 2–3 commercial customer testimonials (company/sector, location, system installed)','Confirm commercial finance options available — PPA, asset finance, lease?'] },
+  { id:'home-services-ov',   name:'Home Services Overview',          section:'core',       sectionLabel:'Core',                tasks:['Confirm the full list of active home services — are these live: Battery Storage, Solar Thermal, Water Source Heat Pump, Underfloor Heating, MVHR, Servicing & Repairs?','Confirm typical installation timelines for each technology','Confirm manufacturer and workmanship warranty terms for each system type'] },
+  { id:'biz-services-ov',    name:'Business Services Overview',      section:'core',       sectionLabel:'Core',                tasks:['Provide sectors and business types you have delivered commercial projects for','Provide at least one commercial case study (sector, system, challenge, outcome, customer quote)','Confirm the full list of commercial services currently offered'] },
+  { id:'ashp',               name:'Air Source Heat Pumps',           section:'services-h', sectionLabel:'Services — Home',     tasks:['Confirm which ASHP brands you currently install and any preferred/accredited manufacturers','Confirm: free site survey or paid design service?','Confirm typical ASHP installation timelines','Confirm warranty terms — manufacturer warranty and workmanship guarantee','Provide an ASHP homeowner case study, or confirm Claire\'s case study (Homepage) can be referenced here'] },
+  { id:'gshp',               name:'Ground Source Heat Pumps',        section:'services-h', sectionLabel:'Services — Home',     tasks:['Confirm: horizontal ground loops, vertical boreholes, or both?','Confirm your process for garden reinstatement after ground loop installation','Confirm GSHP brands installed (e.g. Nibe, Vaillant, Ecoforest, Mastertherm)','Provide a homeowner GSHP case study'] },
+  { id:'solar-pv',           name:'Solar PV',                        section:'services-h', sectionLabel:'Services — Home',     tasks:['Confirm solar panel and inverter brands you currently install','Confirm warranty terms — panel performance warranty and product warranty periods','Do you offer a monitoring app or portal for customers? If so, which platform?','Confirm: link to or include Battery Storage on this page, or create a separate Battery Storage page?'] },
+  { id:'ev-chargers',        name:'EV Chargers',                     section:'services-h', sectionLabel:'Services — Home',     tasks:['Confirm EV charger brands installed (e.g. Ohme, Zappi, Andersen, Hypervolt, Easee)','Confirm OZEV registration status','Confirm current EV Chargepoint Grant availability and amount','Provide an EV charger customer case study or testimonial'] },
+  { id:'storage-heaters',    name:'Storage Heaters',                 section:'services-h', sectionLabel:'Services — Home',     tasks:['Confirm storage heater brands supplied and installed (e.g. Elnur, Dimplex, Electrorad, Haverland)','Confirm manufacturer warranty period for storage heaters','Are storage heaters a primary recommendation or an alternative when heat pumps aren\'t suitable?'] },
+  { id:'insulation',         name:'Insulation',                      section:'services-h', sectionLabel:'Services — Home',     tasks:['Confirm which insulation types you offer — loft, cavity wall, solid wall (internal/external), underfloor, other','Confirm GBIS and/or ECO4 registration for insulation delivery','Provide insulation customer testimonials or case study'] },
+  { id:'renewable-tech',     name:'Renewable Technology Services',   section:'services-b', sectionLabel:'Services — Business', tasks:['Confirm the full list of commercial renewable technology services offered','Provide a list of industries and sectors worked with commercially','Confirm commercial finance options: asset finance, PPA, lease?'] },
+  { id:'commercial-solar',   name:'Commercial Solar PV',             section:'services-b', sectionLabel:'Services — Business', tasks:['Confirm typical commercial system sizes installed (smallest to largest in kWp)','Confirm typical commercial solar payback period range','Confirm commercial finance options available','Confirm: do you offer commercial battery storage? Products and capacity ranges?','Provide a commercial solar case study (sector, system size, key outcomes)'] },
+  { id:'design-feasibility', name:'Design & Feasibility',            section:'services-b', sectionLabel:'Services — Business', tasks:['Confirm: paid standalone service, free initial assessment, or both?','Confirm typical turnaround from survey to report delivery','Provide a case study where a feasibility study led to a successful commercial installation'] },
+  { id:'funding-support',    name:'Funding Support',                 section:'services-b', sectionLabel:'Services — Business', tasks:['Confirm the full list of commercial grant schemes and finance products you currently support','Confirm: is funding support included in project management, or a standalone service?','Provide a case study where funding support materially improved a commercial project outcome'] },
+  { id:'grants-overview',    name:'Grants Overview',                 section:'grants',     sectionLabel:'Grants',              tasks:['Confirm the full list of grant schemes you actively support homeowners and businesses in accessing','Confirm current availability of OZEV EV Chargepoint Grant for homeowners','Confirm any other commercial funding schemes you support (e.g. UKSPF, rural payments)'] },
+  { id:'bus',                name:'Boiler Upgrade Scheme',           section:'grants',     sectionLabel:'Grants',              tasks:['Confirm MCS certification is current and you are actively claiming BUS vouchers for customers','Confirm current BUS grant values (can change — always verify)','Provide customer examples of successful BUS applications for social proof'] },
+  { id:'gbis',               name:'Great British Insulation Scheme', section:'grants',     sectionLabel:'Grants',              tasks:['Confirm GBIS registration — are you registered to deliver measures under GBIS?','Confirm which specific insulation measures you deliver under GBIS','Confirm whether GBIS is currently accepting new applications in your area'] },
+  { id:'eco4',               name:'Energy Company Obligation (ECO4)',section:'grants',     sectionLabel:'Grants',              tasks:['Confirm ECO4 registration — are you registered to deliver ECO4 measures?','Confirm which specific measures you deliver under ECO4','Do you offer ECO4 Flex (local authority referral route for non-benefit households)?'] },
+  { id:'ev-homecharge',      name:'EV Homecharge Scheme',            section:'grants',     sectionLabel:'Grants',              tasks:['Confirm OZEV approval and whether you actively claim EV charger grants for eligible customers','Confirm current status and grant amounts for EV Chargepoint Grant and Workplace Charging Scheme','Confirm: do you offer the Workplace Charging Scheme to businesses?'] },
+  { id:'warm-well',          name:'Warm and Well',                   section:'grants',     sectionLabel:'Grants',              tasks:['Confirm your relationship with Warm and Well — registered delivery partner, approved contractor, or referral only?','Confirm current scheme eligibility criteria and details'] },
+  { id:'barclays',           name:'Barclays Greener Home Reward',    section:'grants',     sectionLabel:'Grants',              tasks:['Verify current reward amounts, qualifying improvements and eligibility directly with Barclays before publishing','Confirm: dedicated page or include as a section within Grants Overview?'] },
+  { id:'about',              name:'About Us',                        section:'about',      sectionLabel:'About',               tasks:['Provide company founding story — when founded, how it has grown, what drives the team','Confirm all accreditations — MCS, HETAS, GivEnergy, RECC, TrustMark, NICEIC, NAPIT, and any others','Provide team profiles — name, role, background — and photos for key team members','Provide key company statistics — installations completed, years in business, team size, carbon saved','Confirm: in-house engineers exclusively, or are subcontractors used for any work?'] },
+  { id:'case-studies',       name:'Case Studies Overview',           section:'about',      sectionLabel:'About',               tasks:['Provide at minimum 3 completed case studies (title, sector, system, challenge, solution, outcome, customer quote)','Provide project photography for each case study','Confirm customer permission to use name, location and testimonial on the website','Provide 3–5 customer testimonials for the case studies overview page'] },
+  { id:'join-team',          name:'Join Our Team',                   section:'about',      sectionLabel:'About',               tasks:['Provide employee offering — salary ranges, benefits, training, development, culture','Provide current vacancies (or confirm focus on speculative applications), and confirm recruitment email address','Provide 2–3 short quotes from existing team members about working at Wiltshire Energy'] },
+  { id:'contact',            name:'Contact',                         section:'core',       sectionLabel:'Core',                tasks:['Confirm full registered office address for display on the Contact page','Confirm office and phone hours','Confirm target response time for email and online enquiries','Confirm preferred contact form fields and any CRM or lead system the form should feed into'] },
+  { id:'faqs',               name:'FAQs',                            section:'core',       sectionLabel:'Core',                tasks:['Answer all [CLIENT TO CONFIRM] placeholders in the FAQ page — warranty terms, installation timelines, survey policy, EV grant status','Confirm in-house vs subcontracted labour policy for FAQ','Provide any additional FAQs you regularly receive that aren\'t already covered'] },
 ];
 
 const STATUSES = [
-  { value: 'toaction',   label: '⬜ To Action',   cls: 's-toaction'   },
-  { value: 'inreview',   label: '🔵 In Review',   cls: 's-inreview'   },
-  { value: 'inprogress', label: '🟡 In Progress', cls: 's-inprogress' },
-  { value: 'approved',   label: '✅ Approved',    cls: 's-approved'   },
+  { value:'toaction',   label:'⬜ To Action',   cls:'s-toaction'   },
+  { value:'inreview',   label:'🔵 In Review',   cls:'s-inreview'   },
+  { value:'inprogress', label:'🟡 In Progress', cls:'s-inprogress' },
+  { value:'approved',   label:'✅ Approved',    cls:'s-approved'   },
 ];
+const SECTION_CLS = { core:'sl-core', 'services-h':'sl-services-h', 'services-b':'sl-services-b', grants:'sl-grants', about:'sl-about' };
 
-const SECTION_CLS = {
-  'core':       'sl-core',
-  'services-h': 'sl-services-h',
-  'services-b': 'sl-services-b',
-  'grants':     'sl-grants',
-  'about':      'sl-about',
-};
-
-function getStatus(id) {
-  return localStorage.getItem('we-status-' + id) || 'toaction';
-}
-
-function setStatus(id, val) {
-  localStorage.setItem('we-status-' + id, val);
-  updateProgress();
-}
+const getStatus  = id  => localStorage.getItem('we-status-' + id) || 'toaction';
+const setStatus  = (id,v) => { localStorage.setItem('we-status-' + id, v); updateProgress(); };
+const getTaskDone = (pid,ti) => localStorage.getItem(`we-task-${pid}-${ti}`) === '1';
+const setTaskDone = (pid,ti,v) => localStorage.setItem(`we-task-${pid}-${ti}`, v ? '1' : '0');
 
 function buildTable() {
   const tbody = document.getElementById('pagesTableBody');
   tbody.innerHTML = '';
-  PAGES.forEach(page => {
-    const current = getStatus(page.id);
+  PAGES.forEach((page, pi) => {
+    const cur = getStatus(page.id);
+    const doneCount = page.tasks.filter((_,ti) => getTaskDone(page.id, ti)).length;
+
     const tr = document.createElement('tr');
+    tr.className = 'page-row';
+    tr.dataset.id = page.id;
     tr.innerHTML = `
-      <td class="page-name">${page.name}</td>
+      <td><span class="page-name"><span class="expand-icon">▶</span>${page.name}</span></td>
       <td><span class="section-label ${SECTION_CLS[page.section]}">${page.sectionLabel}</span></td>
-      <td><span class="review-count">${page.tasks} item${page.tasks !== 1 ? 's' : ''}</span></td>
+      <td><span class="review-count" title="Click row to expand tasks">${doneCount}/${page.tasks.length} tasks</span></td>
       <td style="text-align:right">
-        <select class="status-select ${STATUSES.find(s=>s.value===current).cls}"
-                data-id="${page.id}"
-                onchange="handleChange(this)">
-          ${STATUSES.map(s => `<option value="${s.value}"${s.value===current?' selected':''}>${s.label}</option>`).join('')}
+        <select class="status-select ${STATUSES.find(s=>s.value===cur).cls}" data-id="${page.id}" onclick="event.stopPropagation()" onchange="handleStatusChange(this)">
+          ${STATUSES.map(s=>`<option value="${s.value}"${s.value===cur?' selected':''}>${s.label}</option>`).join('')}
         </select>
       </td>`;
+    tr.addEventListener('click', () => toggleTasks(page.id));
     tbody.appendChild(tr);
+
+    const taskTr = document.createElement('tr');
+    taskTr.className = 'task-row hidden';
+    taskTr.dataset.for = page.id;
+    const taskHtml = page.tasks.map((t,ti) => {
+      const done = getTaskDone(page.id, ti);
+      return `<li class="task-item${done?' done':''}" data-pid="${page.id}" data-ti="${ti}">
+        <input type="checkbox" class="task-cb" ${done?'checked':''} onchange="handleTaskCheck(this)" onclick="event.stopPropagation()">
+        <span class="task-text">${t}</span>
+      </li>`;
+    }).join('');
+    taskTr.innerHTML = `<td colspan="4"><div class="task-panel"><ul class="task-list">${taskHtml}</ul><div class="task-done-count" id="tdc-${page.id}">${doneCount} of ${page.tasks.length} tasks addressed</div></div></td>`;
+    tbody.appendChild(taskTr);
   });
   updateProgress();
 }
 
-function handleChange(sel) {
-  const id  = sel.dataset.id;
+function toggleTasks(id) {
+  const pageRow = document.querySelector(`.page-row[data-id="${id}"]`);
+  const taskRow = document.querySelector(`.task-row[data-for="${id}"]`);
+  const isOpen = !taskRow.classList.contains('hidden');
+  pageRow.classList.toggle('expanded', !isOpen);
+  taskRow.classList.toggle('hidden', isOpen);
+}
+
+function handleStatusChange(sel) {
+  const id = sel.dataset.id;
   const val = sel.value;
-  sel.className = 'status-select ' + STATUSES.find(s => s.value === val).cls;
+  sel.className = 'status-select ' + STATUSES.find(s=>s.value===val).cls;
   setStatus(id, val);
 }
 
+function handleTaskCheck(cb) {
+  const pid = cb.closest('[data-pid]').dataset.pid;
+  const ti  = cb.closest('[data-ti]').dataset.ti;
+  const done = cb.checked;
+  setTaskDone(pid, parseInt(ti), done);
+  const li = cb.closest('.task-item');
+  li.classList.toggle('done', done);
+  const page = PAGES.find(p=>p.id===pid);
+  const doneCount = page.tasks.filter((_,i) => getTaskDone(pid, i)).length;
+  document.getElementById(`tdc-${pid}`).textContent = `${doneCount} of ${page.tasks.length} tasks addressed`;
+  document.querySelector(`.page-row[data-id="${pid}"] .review-count`).textContent = `${doneCount}/${page.tasks.length} tasks`;
+}
+
 function updateProgress() {
-  const counts = { toaction: 0, inreview: 0, inprogress: 0, approved: 0 };
+  const counts = { toaction:0, inreview:0, inprogress:0, approved:0 };
   PAGES.forEach(p => counts[getStatus(p.id)]++);
-  const total    = PAGES.length;
-  const approved = counts.approved;
-  const pct      = Math.round((approved / total) * 100);
-
+  const pct = Math.round((counts.approved / PAGES.length) * 100);
   document.getElementById('progressFill').style.width  = pct + '%';
-  document.getElementById('progressCount').textContent = approved + ' of ' + total + ' approved';
-
+  document.getElementById('progressCount').textContent = counts.approved + ' of ' + PAGES.length + ' approved';
   document.getElementById('pill-toaction').textContent   = counts.toaction   + ' To Action';
   document.getElementById('pill-inreview').textContent   = counts.inreview   + ' In Review';
   document.getElementById('pill-inprogress').textContent = counts.inprogress + ' In Progress';
@@ -382,37 +317,35 @@ function updateProgress() {
 }
 
 function resetAll() {
-  if (!confirm('Reset all statuses back to "To Action"?')) return;
-  PAGES.forEach(p => localStorage.removeItem('we-status-' + p.id));
+  if (!confirm('Reset all page statuses and task checkboxes?')) return;
+  PAGES.forEach(p => {
+    localStorage.removeItem('we-status-' + p.id);
+    p.tasks.forEach((_,ti) => localStorage.removeItem(`we-task-${p.id}-${ti}`));
+  });
   buildTable();
 }
 
 function copyReport() {
-  const lines = ['Wiltshire Energy — Content Review Status', new Date().toLocaleDateString('en-GB', {day:'numeric',month:'long',year:'numeric'}), ''];
+  const lines = ['Wiltshire Energy — Content Review Status', new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}), ''];
   const groups = {};
   PAGES.forEach(p => {
-    const st = STATUSES.find(s => s.value === getStatus(p.id)).label;
+    const st = STATUSES.find(s=>s.value===getStatus(p.id)).label;
+    const done = p.tasks.filter((_,ti)=>getTaskDone(p.id,ti)).length;
     if (!groups[p.sectionLabel]) groups[p.sectionLabel] = [];
-    groups[p.sectionLabel].push(`  ${st.padEnd(18)} ${p.name}`);
+    groups[p.sectionLabel].push(`  ${st.padEnd(18)} ${p.name} (${done}/${p.tasks.length} tasks)`);
   });
-  Object.entries(groups).forEach(([section, rows]) => {
-    lines.push(section);
-    rows.forEach(r => lines.push(r));
-    lines.push('');
-  });
-  const approved = PAGES.filter(p => getStatus(p.id) === 'approved').length;
+  Object.entries(groups).forEach(([sec,rows]) => { lines.push(sec); rows.forEach(r=>lines.push(r)); lines.push(''); });
+  const approved = PAGES.filter(p=>getStatus(p.id)==='approved').length;
   lines.push(`Total approved: ${approved} / ${PAGES.length}`);
-
   navigator.clipboard.writeText(lines.join('\n')).then(() => {
     const btn = document.getElementById('copyBtn');
     btn.textContent = '✓ Copied!';
     btn.classList.add('copy-success');
-    setTimeout(() => { btn.textContent = 'Copy status report'; btn.classList.remove('copy-success'); }, 2000);
+    setTimeout(()=>{ btn.textContent='Copy status report'; btn.classList.remove('copy-success'); }, 2000);
   });
 }
 
 buildTable();
 </script>
-
 </body>
 </html>
