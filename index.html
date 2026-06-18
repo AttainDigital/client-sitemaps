@@ -315,9 +315,7 @@ function buildTable() {
   const tbody = document.getElementById('pagesTableBody');
   tbody.innerHTML = '';
   PAGES.forEach((page, pi) => {
-    const cur = getStatus(page.id);
     const doneCount = page.tasks.filter((_,ti) => getTaskDone(page.id, ti)).length;
-
     const curClient = getClientStatus(page.id);
     const curAgency = getAgencyStatus(page.id);
 
