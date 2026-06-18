@@ -22,8 +22,13 @@
   .pdf-hint { font-size: 0.78rem; color: #888; }
 
   header { background: #1b4332; color: #fff; padding: 32px 40px; }
+  .header-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
+  .header-text { flex: 1; }
   header h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 4px; }
   header p { font-size: 0.9rem; color: rgba(255,255,255,0.6); }
+  .header-nav { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; flex-shrink: 0; }
+  .nav-link { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: #fff; text-decoration: none; font-size: 0.82rem; font-weight: 600; padding: 8px 16px; border-radius: 7px; border: 1px solid rgba(255,255,255,0.2); transition: background 0.15s; white-space: nowrap; }
+  .nav-link:hover { background: rgba(255,255,255,0.22); }
 
   .canvas { padding: 40px; max-width: 1500px; margin: 0 auto; }
 
@@ -111,8 +116,16 @@
 </div>
 
 <header>
-  <h1>Cotswold Energy — Visual Sitemap</h1>
-  <p>cotswold.energy &nbsp;·&nbsp; 46 pages &nbsp;·&nbsp; Generated June 2026</p>
+  <div class="header-inner">
+    <div class="header-text">
+      <h1>Cotswold Energy — Visual Sitemap</h1>
+      <p>cotswold.energy &nbsp;·&nbsp; 46 pages &nbsp;·&nbsp; Generated June 2026</p>
+    </div>
+    <div class="header-nav">
+      <a href="index.html" class="nav-link">📋 Overview</a>
+      <a href="tasks.html" class="nav-link">✅ All Tasks</a>
+    </div>
+  </div>
 </header>
 
 <div class="canvas">
