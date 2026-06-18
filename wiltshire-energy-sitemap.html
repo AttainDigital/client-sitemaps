@@ -8,271 +8,233 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f4f8; color: #1a2332; }
 
-  /* PRINT BUTTON */
-  .pdf-bar {
-    background: #fff; border-bottom: 1px solid #dde4ed;
-    padding: 12px 40px; display: flex; align-items: center; gap: 16px;
-  }
-  .pdf-btn {
-    background: #1a3a5c; color: #fff; border: none; border-radius: 6px;
-    padding: 10px 22px; font-size: 0.85rem; font-weight: 600; cursor: pointer;
-    display: flex; align-items: center; gap: 8px; letter-spacing: 0.2px;
-  }
+  .pdf-bar { background: #fff; border-bottom: 1px solid #dde4ed; padding: 12px 40px; display: flex; align-items: center; gap: 16px; }
+  .pdf-btn { background: #1a3a5c; color: #fff; border: none; border-radius: 6px; padding: 10px 22px; font-size: 0.85rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; }
   .pdf-btn:hover { background: #2a5298; }
   .pdf-hint { font-size: 0.78rem; color: #888; }
-
-  /* PRINT STYLES */
-  @media print {
-    .pdf-bar { display: none !important; }
-    body { background: #fff; }
-    header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .section-header, .page-card, .stat, .root-node {
-      -webkit-print-color-adjust: exact; print-color-adjust: exact;
-    }
-    .canvas { padding: 20px; }
-    @page {
-      size: A3 landscape;
-      margin: 15mm;
-    }
-  }
 
   header { background: #1a3a5c; color: #fff; padding: 32px 40px; }
   header h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 4px; }
   header p { font-size: 0.9rem; color: rgba(255,255,255,0.6); }
 
-  .canvas { padding: 40px; max-width: 1500px; margin: 0 auto; }
+  .canvas { padding: 40px; max-width: 1600px; margin: 0 auto; }
 
   /* ROOT */
   .root-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 8px; }
-  .root-node {
-    background: #1a3a5c; color: #fff;
-    padding: 14px 40px; border-radius: 8px;
-    font-size: 1rem; font-weight: 700; letter-spacing: 0.3px;
-    text-decoration: none;
-    box-shadow: 0 2px 8px rgba(26,58,92,0.25);
-  }
+  .root-node { background: #1a3a5c; color: #fff; padding: 14px 40px; border-radius: 8px; font-size: 1rem; font-weight: 700; letter-spacing: 0.3px; text-decoration: none; box-shadow: 0 2px 8px rgba(26,58,92,0.25); }
   .root-node:hover { background: #2a5298; }
-
-  /* CONNECTOR LINES */
   .v-line { width: 2px; height: 32px; background: #bfcfe0; margin: 0 auto; }
+  .h-bridge { height: 2px; background: #bfcfe0; margin: 0 calc(100% / 14); }
 
-  /* TOP-LEVEL SECTIONS ROW */
-  .sections-row { display: grid; grid-template-columns: repeat(9, 1fr); gap: 0; position: relative; }
+  /* SECTIONS GRID — 7 columns */
+  .sections-row { display: grid; grid-template-columns: 2fr 1.8fr 1.4fr 2fr 1fr 1fr 1.4fr; gap: 0; }
   .section-col { display: flex; flex-direction: column; align-items: center; }
   .section-connector { width: 2px; height: 28px; background: #bfcfe0; }
 
   /* SECTION HEADERS */
-  .section-header {
-    padding: 10px 14px; border-radius: 6px; font-size: 0.8rem; font-weight: 700;
-    text-align: center; white-space: nowrap; width: 100%; max-width: 140px;
-    border: 2px solid transparent;
-  }
-  .col-home       { background: #dbeafe; border-color: #3b82f6; color: #1e3a5f; }
-  .col-business   { background: #cce8f4; border-color: #3a9cbf; color: #0d3d56; }
-  .col-services-h { background: #d1fae5; border-color: #10b981; color: #064e3b; }
-  .col-services-b { background: #ddeef8; border-color: #5aade8; color: #0d3d56; }
-  .col-grants     { background: #fff3cd; border-color: #ffc107; color: #664d03; }
-  .col-about      { background: #f0e6ff; border-color: #9b72cf; color: #3d1a78; }
-  .col-cases      { background: #ffe8d6; border-color: #f4845f; color: #7b2d00; }
-  .col-blog       { background: #fce4ec; border-color: #f06292; color: #7b0032; }
-  .col-other      { background: #f1f3f5; border-color: #adb5bd; color: #343a40; }
+  .section-header { padding: 10px 14px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; text-align: center; white-space: nowrap; width: 100%; max-width: 160px; border: 2px solid transparent; }
+  .col-home      { background: #d1fae5; border-color: #10b981; color: #064e3b; }
+  .col-business  { background: #dbeafe; border-color: #3b82f6; color: #1e3a5f; }
+  .col-projects  { background: #ffe8d6; border-color: #f4845f; color: #7b2d00; }
+  .col-resources { background: #fff3cd; border-color: #ffc107; color: #664d03; }
+  .col-about     { background: #f0e6ff; border-color: #9b72cf; color: #3d1a78; }
+  .col-contact   { background: #e0e7ff; border-color: #6366f1; color: #312e81; }
+  .col-other     { background: #f1f3f5; border-color: #adb5bd; color: #343a40; }
 
   /* PAGE CARDS */
-  .pages-list { display: flex; flex-direction: column; align-items: center; gap: 0; width: 100%; padding: 0 4px; margin-top: 0; }
+  .pages-list { display: flex; flex-direction: column; align-items: center; gap: 0; width: 100%; padding: 0 4px; }
   .page-connector { width: 2px; height: 14px; background: #bfcfe0; }
-  .page-card {
-    background: #fff; border: 1px solid #dde4ed;
-    border-radius: 5px; padding: 7px 10px;
-    font-size: 0.72rem; line-height: 1.35;
-    text-align: center; width: 100%; max-width: 140px;
-    color: #2d3748; text-decoration: none;
-    transition: box-shadow 0.15s, border-color 0.15s;
-  }
-  .page-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-color: #3b82f6; color: #1a3a5c; }
+  .page-card { background: #fff; border: 1px solid #dde4ed; border-radius: 5px; padding: 7px 10px; font-size: 0.72rem; line-height: 1.35; text-align: center; width: 100%; max-width: 160px; color: #2d3748; text-decoration: none; transition: box-shadow 0.15s, border-color 0.15s; }
+  .page-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-color: #1a3a5c; color: #1a3a5c; }
   .page-card.overview { font-weight: 600; background: #f8faff; }
+  .page-card.tbc { background: #fafafa; color: #aab; border-style: dashed; font-style: italic; }
 
-  /* HORIZONTAL BRIDGE */
-  .h-bridge {
-    display: flex; height: 2px; background: #bfcfe0;
-    margin: 0 calc(100% / 18);
-  }
+  /* SUB-GROUP LABELS within a column (e.g. "Grants" / "Blog" inside Resources) */
+  .sub-group-gap { width: 2px; height: 18px; background: transparent; }
+  .sub-group-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #94a3b8; text-align: center; width: 100%; max-width: 160px; padding: 4px 0 2px; border-top: 1px dashed #dde4ed; margin-top: 4px; }
 
-  /* LEGEND */
-  .legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 36px; padding-top: 24px; border-top: 1px solid #dde4ed; }
-  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: #555; }
-  .legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+  /* SERVICES INDENT — slightly indented cards within a nav section */
+  .indent-connector { width: 2px; height: 14px; background: #bfcfe0; margin-left: 12px; }
+  .page-card.indented { margin-left: 0; border-left: 3px solid #e2e8f0; }
 
-  .stats { display: flex; gap: 24px; margin-top: 20px; flex-wrap: wrap; }
+  /* STATS */
+  .stats { display: flex; gap: 24px; margin-top: 32px; flex-wrap: wrap; }
   .stat { background: #fff; border: 1px solid #dde4ed; border-radius: 8px; padding: 14px 20px; }
   .stat-num { font-size: 1.6rem; font-weight: 700; color: #1a3a5c; line-height: 1; }
   .stat-label { font-size: 0.78rem; color: #888; margin-top: 2px; }
+
+  /* LEGEND */
+  .legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #dde4ed; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: #555; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+
+  @media print {
+    .pdf-bar { display: none !important; }
+    body { background: #fff; }
+    header, .section-header, .page-card, .stat, .root-node { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .canvas { padding: 20px; }
+    @page { size: A3 landscape; margin: 15mm; }
+  }
 </style>
 </head>
 <body>
 
 <div class="pdf-bar">
-  <button class="pdf-btn" onclick="window.print()">
-    ⬇ Download as PDF
-  </button>
-  <span class="pdf-hint">Click the button → in the print dialog, set Destination to "Save as PDF" → Save</span>
+  <button class="pdf-btn" onclick="window.print()">⬇ Download as PDF</button>
+  <span class="pdf-hint">Click → set Destination to "Save as PDF" → set paper to A3 Landscape → Save</span>
 </div>
 
 <header>
   <h1>Wiltshire Energy — Visual Sitemap</h1>
-  <p>wiltshire.energy &nbsp;·&nbsp; 39 pages &nbsp;·&nbsp; Generated June 2026</p>
+  <p>wiltshire.energy &nbsp;·&nbsp; 40 pages &nbsp;·&nbsp; June 2026</p>
 </header>
 
 <div class="canvas">
 
   <!-- ROOT -->
   <div class="root-wrap">
-    <a href="https://wiltshire.energy/" target="_blank" class="root-node">wiltshire.energy/</a>
+    <a href="https://wiltshire.energy/" target="_blank" class="root-node">wiltshire.energy/ — Homepage</a>
     <div class="v-line"></div>
   </div>
 
-  <!-- HORIZONTAL BRIDGE -->
   <div class="h-bridge"></div>
 
-  <!-- SECTIONS + PAGES -->
   <div class="sections-row">
 
-    <!-- HOME -->
+    <!-- FOR HOME -->
     <div class="section-col">
       <div class="section-connector"></div>
-      <div class="section-header col-home">Home</div>
+      <div class="section-header col-home">For Home</div>
       <div class="pages-list">
         <div class="page-connector"></div>
         <a href="https://wiltshire.energy/home/" target="_blank" class="page-card overview">Home Landing</a>
         <div class="page-connector"></div>
         <a href="https://wiltshire.energy/home/services/" target="_blank" class="page-card">Home Services Overview</a>
+        <div class="sub-group-gap"></div>
+        <div class="sub-group-label">Services</div>
+        <div class="page-connector"></div>
+        <a href="https://wiltshire.energy/service/home/air-source-heat-pumps/" target="_blank" class="page-card indented">Air Source Heat Pumps</a>
+        <div class="page-connector"></div>
+        <a href="https://wiltshire.energy/service/home/ground-source-heat-pumps/" target="_blank" class="page-card indented">Ground Source Heat Pumps</a>
+        <div class="page-connector"></div>
+        <a href="https://wiltshire.energy/service/home/solar-pv/" target="_blank" class="page-card indented">Solar PV</a>
+        <div class="page-connector"></div>
+        <a href="https://wiltshire.energy/service/home/ev-chargers/" target="_blank" class="page-card indented">EV Chargers</a>
+        <div class="page-connector"></div>
+        <a href="https://wiltshire.energy/service/home/storage-heaters/" target="_blank" class="page-card indented">Storage Heaters</a>
+        <div class="page-connector"></div>
+        <a href="https://wiltshire.energy/service/home/insulation/" target="_blank" class="page-card indented">Insulation</a>
       </div>
     </div>
 
-    <!-- BUSINESS -->
+    <!-- FOR BUSINESS -->
     <div class="section-col">
       <div class="section-connector"></div>
-      <div class="section-header col-business">Business</div>
+      <div class="section-header col-business">For Business</div>
       <div class="pages-list">
         <div class="page-connector"></div>
         <a href="https://wiltshire.energy/business/" target="_blank" class="page-card overview">Business Landing</a>
         <div class="page-connector"></div>
         <a href="https://wiltshire.energy/business/services/" target="_blank" class="page-card">Business Services Overview</a>
+        <div class="sub-group-gap"></div>
+        <div class="sub-group-label">Services</div>
+        <div class="page-connector"></div>
+        <a href="https://wiltshire.energy/service/business/renewable-technology-services/" target="_blank" class="page-card indented">Renewable Technology</a>
+        <div class="page-connector"></div>
+        <a href="https://wiltshire.energy/service/business/solar-pv/" target="_blank" class="page-card indented">Solar PV</a>
+        <div class="page-connector"></div>
+        <a href="https://wiltshire.energy/service/business/design-and-feasibility/" target="_blank" class="page-card indented">Design & Feasibility</a>
+        <div class="page-connector"></div>
+        <a href="https://wiltshire.energy/service/business/funding-support/" target="_blank" class="page-card indented">Funding Support</a>
       </div>
     </div>
 
-    <!-- SERVICES HOME -->
+    <!-- PROJECTS -->
     <div class="section-col">
       <div class="section-connector"></div>
-      <div class="section-header col-services-h">Services — Home</div>
+      <div class="section-header col-projects">Projects</div>
       <div class="pages-list">
         <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/service/home/air-source-heat-pumps/" target="_blank" class="page-card">Air Source Heat Pumps</a>
+        <a href="https://wiltshire.energy/case-studies/" target="_blank" class="page-card overview">Case Studies Overview</a>
         <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/service/home/ground-source-heat-pumps/" target="_blank" class="page-card">Ground Source Heat Pumps</a>
+        <a href="https://wiltshire.energy/case-study/" target="_blank" class="page-card tbc">Case Study 1 (TBC)</a>
         <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/service/home/solar-pv/" target="_blank" class="page-card">Solar PV</a>
+        <a href="https://wiltshire.energy/case-study/" target="_blank" class="page-card tbc">Case Study 2 (TBC)</a>
         <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/service/home/ev-chargers/" target="_blank" class="page-card">EV Chargers</a>
-        <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/service/home/storage-heaters/" target="_blank" class="page-card">Storage Heaters</a>
-        <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/service/home/insulation/" target="_blank" class="page-card">Insulation</a>
+        <a href="https://wiltshire.energy/case-study/" target="_blank" class="page-card tbc">Case Study 3 (TBC)</a>
       </div>
     </div>
 
-    <!-- SERVICES BUSINESS -->
+    <!-- RESOURCES -->
     <div class="section-col">
       <div class="section-connector"></div>
-      <div class="section-header col-services-b">Services — Business</div>
+      <div class="section-header col-resources">Resources</div>
       <div class="pages-list">
+        <!-- GRANTS sub-group -->
+        <div class="sub-group-gap"></div>
+        <div class="sub-group-label">Grants & Incentives</div>
         <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/service/business/renewable-technology-services/" target="_blank" class="page-card">Renewable Technology</a>
+        <a href="https://wiltshire.energy/grants-and-incentives/" target="_blank" class="page-card overview">Grants Overview</a>
         <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/service/business/solar-pv/" target="_blank" class="page-card">Solar PV</a>
+        <a href="https://wiltshire.energy/grants-and-incentives/boiler-upgrade-scheme/" target="_blank" class="page-card indented">Boiler Upgrade Scheme</a>
         <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/service/business/design-and-feasibility/" target="_blank" class="page-card">Design & Feasibility</a>
+        <a href="https://wiltshire.energy/grants-and-incentives/great-british-insulation-scheme/" target="_blank" class="page-card indented">Great British Insulation</a>
         <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/service/business/funding-support/" target="_blank" class="page-card">Funding Support</a>
+        <a href="https://wiltshire.energy/grants-and-incentives/energy-company-obligation/" target="_blank" class="page-card indented">Energy Company Obligation</a>
+        <div class="page-connector"></div>
+        <a href="https://wiltshire.energy/grants-and-incentives/ev-homecharge-scheme/" target="_blank" class="page-card indented">EV Homecharge Scheme</a>
+        <div class="page-connector"></div>
+        <a href="https://wiltshire.energy/grants-and-incentives/warm-and-well/" target="_blank" class="page-card indented">Warm and Well</a>
+        <div class="page-connector"></div>
+        <a href="https://wiltshire.energy/grants-and-incentives/barclays-greener-home-reward/" target="_blank" class="page-card indented">Barclays Greener Home</a>
+        <!-- BLOG sub-group -->
+        <div class="sub-group-gap"></div>
+        <div class="sub-group-label">Blog</div>
+        <div class="page-connector"></div>
+        <a href="https://wiltshire.energy/blog/" target="_blank" class="page-card overview">Blog Overview</a>
+        <div class="page-connector"></div>
+        <a href="https://wiltshire.energy/blog/" target="_blank" class="page-card tbc">Blog Post 1 (TBC)</a>
+        <div class="page-connector"></div>
+        <a href="https://wiltshire.energy/blog/" target="_blank" class="page-card tbc">Blog Post 2 (TBC)</a>
+        <div class="page-connector"></div>
+        <a href="https://wiltshire.energy/blog/" target="_blank" class="page-card tbc">Blog Post 3 (TBC)</a>
+        <!-- FAQs standalone -->
+        <div class="sub-group-gap"></div>
+        <div class="sub-group-label">FAQs</div>
+        <div class="page-connector"></div>
+        <a href="https://wiltshire.energy/frequently-asked-questions/" target="_blank" class="page-card">Frequently Asked Questions</a>
       </div>
     </div>
 
-    <!-- GRANTS -->
-    <div class="section-col">
-      <div class="section-connector"></div>
-      <div class="section-header col-grants">Grants & Incentives</div>
-      <div class="pages-list">
-        <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/grants-and-incentives/" target="_blank" class="page-card overview">Overview</a>
-        <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/grants-and-incentives/boiler-upgrade-scheme/" target="_blank" class="page-card">Boiler Upgrade Scheme</a>
-        <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/grants-and-incentives/great-british-insulation-scheme/" target="_blank" class="page-card">Great British Insulation</a>
-        <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/grants-and-incentives/energy-company-obligation/" target="_blank" class="page-card">Energy Company Obligation</a>
-        <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/grants-and-incentives/ev-homecharge-scheme/" target="_blank" class="page-card">EV Homecharge Scheme</a>
-        <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/grants-and-incentives/warm-and-well/" target="_blank" class="page-card">Warm and Well</a>
-        <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/grants-and-incentives/barclays-greener-home-reward/" target="_blank" class="page-card">Barclays Greener Home</a>
-      </div>
-    </div>
-
-    <!-- ABOUT -->
+    <!-- ABOUT US -->
     <div class="section-col">
       <div class="section-connector"></div>
       <div class="section-header col-about">About Us</div>
       <div class="pages-list">
         <div class="page-connector"></div>
         <a href="https://wiltshire.energy/about-us/" target="_blank" class="page-card overview">About Us</a>
-        <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/about-us/join-our-team/" target="_blank" class="page-card">Join Our Team</a>
       </div>
     </div>
 
-    <!-- CASE STUDIES -->
+    <!-- CONTACT US -->
     <div class="section-col">
       <div class="section-connector"></div>
-      <div class="section-header col-cases">Case Studies</div>
+      <div class="section-header col-contact">Contact Us</div>
       <div class="pages-list">
         <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/case-studies/" target="_blank" class="page-card overview">Overview</a>
+        <a href="https://wiltshire.energy/contact/" target="_blank" class="page-card overview">Contact</a>
         <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/case-study/case-study-1/" target="_blank" class="page-card">Case Study Example 1</a>
-        <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/case-study/case-study-2/" target="_blank" class="page-card">Case Study Example 2</a>
-        <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/case-study/case-study-3/" target="_blank" class="page-card">Case Study Example 3</a>
+        <a href="https://wiltshire.energy/contact/thank-you/" target="_blank" class="page-card">Thank You</a>
       </div>
     </div>
 
-    <!-- BLOG -->
-    <div class="section-col">
-      <div class="section-connector"></div>
-      <div class="section-header col-blog">Blog</div>
-      <div class="pages-list">
-        <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/blog/" target="_blank" class="page-card overview">Blog Overview</a>
-        <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/blog/blog-post-1/" target="_blank" class="page-card">Blog Post 1</a>
-        <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/blog/blog-post-2/" target="_blank" class="page-card">Blog Post 2</a>
-        <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/blog/blog-post-3/" target="_blank" class="page-card">Blog Post 3</a>
-      </div>
-    </div>
-
-    <!-- OTHER -->
+    <!-- OTHER PAGES -->
     <div class="section-col">
       <div class="section-connector"></div>
       <div class="section-header col-other">Other Pages</div>
       <div class="pages-list">
         <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/contact/" target="_blank" class="page-card overview">Contact</a>
-        <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/contact/thank-you/" target="_blank" class="page-card">Contact Thank You</a>
-        <div class="page-connector"></div>
-        <a href="https://wiltshire.energy/frequently-asked-questions/" target="_blank" class="page-card">FAQs</a>
+        <a href="https://wiltshire.energy/about-us/join-our-team/" target="_blank" class="page-card">Join Our Team</a>
         <div class="page-connector"></div>
         <a href="https://wiltshire.energy/service-and-maintenance/" target="_blank" class="page-card">Service & Maintenance</a>
         <div class="page-connector"></div>
@@ -286,25 +248,22 @@
 
   </div><!-- /sections-row -->
 
-  <!-- STATS + LEGEND -->
   <div class="stats">
-    <div class="stat"><div class="stat-num">39</div><div class="stat-label">Total Pages</div></div>
+    <div class="stat"><div class="stat-num">40</div><div class="stat-label">Total Pages</div></div>
     <div class="stat"><div class="stat-num">10</div><div class="stat-label">Service Pages</div></div>
     <div class="stat"><div class="stat-num">7</div><div class="stat-label">Grants Pages</div></div>
-    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Case Studies</div></div>
-    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Blog Posts</div></div>
+    <div class="stat"><div class="stat-num">3+</div><div class="stat-label">Case Studies (TBC)</div></div>
+    <div class="stat"><div class="stat-num">3+</div><div class="stat-label">Blog Posts (TBC)</div></div>
   </div>
 
   <div class="legend">
-    <div class="legend-item"><div class="legend-dot" style="background:#3b82f6;"></div> Home</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#3a9cbf;"></div> Business</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#10b981;"></div> Services — Home</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#5aade8;"></div> Services — Business</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#ffc107;"></div> Grants & Incentives</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#10b981;"></div> For Home</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#3b82f6;"></div> For Business</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f4845f;"></div> Projects</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ffc107;"></div> Resources</div>
     <div class="legend-item"><div class="legend-dot" style="background:#9b72cf;"></div> About Us</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#f4845f;"></div> Case Studies</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#f06292;"></div> Blog</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#adb5bd;"></div> Other</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#6366f1;"></div> Contact Us</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#adb5bd;"></div> Other Pages</div>
   </div>
 
 </div>
