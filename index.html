@@ -49,10 +49,11 @@
   .progress-bar-fill { height: 100%; border-radius: 8px; background: #1b4332; transition: width 0.4s ease; width: 0%; }
   .progress-pills { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
   .ppill { font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
-  .ppill-toaction   { background: #f1f5f9; color: #64748b; }
-  .ppill-inreview   { background: #dbeafe; color: #1d4ed8; }
-  .ppill-inprogress { background: #fef3c7; color: #92400e; }
-  .ppill-approved   { background: #dcfce7; color: #166534; }
+  .ppill-toreview    { background: #f1f5f9; color: #64748b; }
+  .ppill-inreview    { background: #dbeafe; color: #1d4ed8; }
+  .ppill-changes     { background: #ffedd5; color: #c2410c; }
+  .ppill-approved    { background: #dcfce7; color: #166534; }
+  .ppill-notrequired { background: #fee2e2; color: #991b1b; }
 
   .table-toolbar { display: flex; justify-content: flex-end; margin-bottom: 14px; gap: 10px; }
   .toolbar-btn { background: #f1f5f9; border: 1px solid #dde4ed; border-radius: 6px; padding: 7px 14px; font-size: 0.78rem; font-weight: 600; cursor: pointer; color: #1a3a5c; transition: background 0.15s; }
@@ -86,12 +87,22 @@
   .sl-about      { background: #f0e6ff; color: #3d1a78; }
   .review-count { display: inline-block; font-size: 0.72rem; font-weight: 600; background: #fff3e0; color: #e65100; padding: 2px 8px; border-radius: 3px; cursor: pointer; }
 
-  .status-select { appearance: none; -webkit-appearance: none; border: 1.5px solid #e2e8f0; border-radius: 6px; padding: 5px 28px 5px 10px; font-size: 0.78rem; font-weight: 600; cursor: pointer; outline: none; min-width: 130px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a9bb0'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; transition: border-color 0.15s; }
+  .status-select { appearance: none; -webkit-appearance: none; border: 1.5px solid #e2e8f0; border-radius: 6px; padding: 5px 26px 5px 8px; font-size: 0.75rem; font-weight: 600; cursor: pointer; outline: none; min-width: 148px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a9bb0'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 8px center; transition: border-color 0.15s; }
   .status-select:focus { border-color: #1a3a5c; }
-  .status-select.s-toaction   { background-color: #f8fafc; color: #475569; border-color: #cbd5e1; }
-  .status-select.s-inreview   { background-color: #eff6ff; color: #1d4ed8; border-color: #93c5fd; }
-  .status-select.s-inprogress { background-color: #fffbeb; color: #92400e; border-color: #fcd34d; }
-  .status-select.s-approved   { background-color: #f0fdf4; color: #166534; border-color: #86efac; }
+  /* Client statuses */
+  .cs-toreview    { background-color: #f8fafc; color: #475569; border-color: #cbd5e1; }
+  .cs-inreview    { background-color: #eff6ff; color: #1d4ed8; border-color: #93c5fd; }
+  .cs-changes     { background-color: #fff7ed; color: #c2410c; border-color: #fdba74; }
+  .cs-approved    { background-color: #f0fdf4; color: #166534; border-color: #86efac; }
+  .cs-notrequired { background-color: #fef2f2; color: #991b1b; border-color: #fca5a5; }
+  /* Agency statuses */
+  .as-draft    { background-color: #f8fafc; color: #475569; border-color: #cbd5e1; }
+  .as-revision { background-color: #f5f3ff; color: #6d28d9; border-color: #c4b5fd; }
+  .as-revised  { background-color: #ecfeff; color: #0e7490; border-color: #67e8f9; }
+  .as-onhold   { background-color: #fffbeb; color: #92400e; border-color: #fcd34d; }
+  .as-complete { background-color: #f0fdf4; color: #166534; border-color: #86efac; }
+  /* Column header labels */
+  .col-header-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: #94a3b8; display: block; text-align: right; margin-bottom: 3px; }
 
   .steps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .step-card { background: #fff; border: 1px solid #dde4ed; border-radius: 10px; padding: 22px 24px; display: flex; gap: 16px; align-items: flex-start; }
@@ -172,10 +183,11 @@
       </div>
       <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
       <div class="progress-pills">
-        <span class="ppill ppill-toaction"   id="pill-toaction">— To Action</span>
-        <span class="ppill ppill-inreview"   id="pill-inreview">— In Review</span>
-        <span class="ppill ppill-inprogress" id="pill-inprogress">— In Progress</span>
-        <span class="ppill ppill-approved"   id="pill-approved">— Approved</span>
+        <span class="ppill ppill-toreview"    id="pill-toreview">— To Review</span>
+        <span class="ppill ppill-inreview"    id="pill-inreview">— In Review</span>
+        <span class="ppill ppill-changes"     id="pill-changes">— Changes Needed</span>
+        <span class="ppill ppill-approved"    id="pill-approved">— Approved</span>
+        <span class="ppill ppill-notrequired" id="pill-notrequired">— Not Required</span>
       </div>
     </div>
 
@@ -191,7 +203,8 @@
           <th>Page</th>
           <th>Section</th>
           <th>Tasks</th>
-          <th style="text-align:right">Status</th>
+          <th style="text-align:right">Client Status</th>
+          <th style="text-align:right">Agency Status</th>
         </tr>
       </thead>
       <tbody id="pagesTableBody"></tbody>
@@ -254,26 +267,47 @@ const SUPABASE_URL = 'https://jecwtcwiveetxeunbtgd.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImplY3d0Y3dpdmVldHhldW5idGdkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyNzk2MjEsImV4cCI6MjA5Mjg1NTYyMX0.VMPx2nBkq8oUfRNXqU8ZfF0Yx5U4OJMHxkAZ9TUOD_I';
 const statusCache = {};
 
+const CLIENT_STATUSES = [
+  { value:'to-review',      label:'⬜ To Review',       cls:'cs-toreview'    },
+  { value:'in-review',      label:'🔵 In Review',       cls:'cs-inreview'    },
+  { value:'changes-needed', label:'🟠 Changes Needed',  cls:'cs-changes'     },
+  { value:'approved',       label:'✅ Approved',         cls:'cs-approved'    },
+  { value:'not-required',   label:'❌ Not Required',     cls:'cs-notrequired' },
+];
+const AGENCY_STATUSES = [
+  { value:'draft-written', label:'📝 Draft Written', cls:'as-draft'    },
+  { value:'in-revision',   label:'✏️ In Revision',   cls:'as-revision' },
+  { value:'revised',       label:'🔄 Revised',        cls:'as-revised'  },
+  { value:'on-hold',       label:'⏸ On Hold',         cls:'as-onhold'   },
+  { value:'complete',      label:'✅ Complete',        cls:'as-complete' },
+];
+
 async function loadStatuses() {
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/wiltshire_energy_status?select=page_id,status`, {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/wiltshire_energy_status?select=page_id,client_status,agency_status`, {
       headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
     });
-    if (res.ok) { const rows = await res.json(); rows.forEach(r => statusCache[r.page_id] = r.status); }
+    if (res.ok) {
+      const rows = await res.json();
+      rows.forEach(r => statusCache[r.page_id] = { client: r.client_status, agency: r.agency_status });
+    }
   } catch(e) {}
 }
 
-function getStatus(id) { return statusCache[id] || 'toaction'; }
+function getClientStatus(id) { return (statusCache[id] && statusCache[id].client) || 'to-review'; }
+function getAgencyStatus(id) { return (statusCache[id] && statusCache[id].agency) || 'draft-written'; }
 
-function setStatus(id, v) {
-  statusCache[id] = v;
+function saveStatus(id) {
+  if (!statusCache[id]) statusCache[id] = {};
   fetch(`${SUPABASE_URL}/rest/v1/wiltshire_energy_status`, {
     method: 'POST',
     headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'resolution=merge-duplicates' },
-    body: JSON.stringify({ page_id: id, status: v, updated_at: new Date().toISOString() })
+    body: JSON.stringify({ page_id: id, client_status: statusCache[id].client || 'to-review', agency_status: statusCache[id].agency || 'draft-written', updated_at: new Date().toISOString() })
   });
-  updateProgress();
 }
+
+function setClientStatus(id, v) { if (!statusCache[id]) statusCache[id] = {}; statusCache[id].client = v; saveStatus(id); updateProgress(); }
+function setAgencyStatus(id, v) { if (!statusCache[id]) statusCache[id] = {}; statusCache[id].agency = v; saveStatus(id); updateProgress(); }
 const getTaskDone = (pid,ti) => localStorage.getItem(`we-task-${pid}-${ti}`) === '1';
 const setTaskDone = (pid,ti,v) => localStorage.setItem(`we-task-${pid}-${ti}`, v ? '1' : '0');
 
@@ -284,6 +318,9 @@ function buildTable() {
     const cur = getStatus(page.id);
     const doneCount = page.tasks.filter((_,ti) => getTaskDone(page.id, ti)).length;
 
+    const curClient = getClientStatus(page.id);
+    const curAgency = getAgencyStatus(page.id);
+
     const tr = document.createElement('tr');
     tr.className = 'page-row';
     tr.dataset.id = page.id;
@@ -292,8 +329,13 @@ function buildTable() {
       <td><span class="section-label ${SECTION_CLS[page.section]}">${page.sectionLabel}</span></td>
       <td><span class="review-count" title="Click row to expand tasks">${doneCount}/${page.tasks.length} tasks</span></td>
       <td style="text-align:right">
-        <select class="status-select ${STATUSES.find(s=>s.value===cur).cls}" data-id="${page.id}" onclick="event.stopPropagation()" onchange="handleStatusChange(this)">
-          ${STATUSES.map(s=>`<option value="${s.value}"${s.value===cur?' selected':''}>${s.label}</option>`).join('')}
+        <select class="status-select ${CLIENT_STATUSES.find(s=>s.value===curClient).cls}" data-id="${page.id}" data-type="client" onclick="event.stopPropagation()" onchange="handleStatusChange(this)">
+          ${CLIENT_STATUSES.map(s=>`<option value="${s.value}"${s.value===curClient?' selected':''}>${s.label}</option>`).join('')}
+        </select>
+      </td>
+      <td style="text-align:right">
+        <select class="status-select ${AGENCY_STATUSES.find(s=>s.value===curAgency).cls}" data-id="${page.id}" data-type="agency" onclick="event.stopPropagation()" onchange="handleStatusChange(this)">
+          ${AGENCY_STATUSES.map(s=>`<option value="${s.value}"${s.value===curAgency?' selected':''}>${s.label}</option>`).join('')}
         </select>
       </td>`;
     tr.addEventListener('click', () => toggleTasks(page.id));
@@ -309,7 +351,7 @@ function buildTable() {
         <span class="task-text">${t}</span>
       </li>`;
     }).join('');
-    taskTr.innerHTML = `<td colspan="4"><div class="task-panel"><ul class="task-list">${taskHtml}</ul><div class="task-done-count" id="tdc-${page.id}">${doneCount} of ${page.tasks.length} tasks addressed</div></div></td>`;
+    taskTr.innerHTML = `<td colspan="5"><div class="task-panel"><ul class="task-list">${taskHtml}</ul><div class="task-done-count" id="tdc-${page.id}">${doneCount} of ${page.tasks.length} tasks addressed</div></div></td>`;
     tbody.appendChild(taskTr);
   });
   updateProgress();
@@ -324,10 +366,16 @@ function toggleTasks(id) {
 }
 
 function handleStatusChange(sel) {
-  const id = sel.dataset.id;
-  const val = sel.value;
-  sel.className = 'status-select ' + STATUSES.find(s=>s.value===val).cls;
-  setStatus(id, val);
+  const id   = sel.dataset.id;
+  const type = sel.dataset.type;
+  const val  = sel.value;
+  if (type === 'client') {
+    sel.className = 'status-select ' + CLIENT_STATUSES.find(s=>s.value===val).cls;
+    setClientStatus(id, val);
+  } else {
+    sel.className = 'status-select ' + AGENCY_STATUSES.find(s=>s.value===val).cls;
+    setAgencyStatus(id, val);
+  }
 }
 
 function handleTaskCheck(cb) {
@@ -344,21 +392,23 @@ function handleTaskCheck(cb) {
 }
 
 function updateProgress() {
-  const counts = { toaction:0, inreview:0, inprogress:0, approved:0 };
-  PAGES.forEach(p => counts[getStatus(p.id)]++);
-  const pct = Math.round((counts.approved / PAGES.length) * 100);
+  const counts = { 'to-review':0, 'in-review':0, 'changes-needed':0, 'approved':0, 'not-required':0 };
+  PAGES.forEach(p => { const cs = getClientStatus(p.id); if (counts[cs] !== undefined) counts[cs]++; });
+  const active = PAGES.length - counts['not-required'];
+  const pct = active > 0 ? Math.round((counts['approved'] / active) * 100) : 0;
   document.getElementById('progressFill').style.width  = pct + '%';
-  document.getElementById('progressCount').textContent = counts.approved + ' of ' + PAGES.length + ' approved';
-  document.getElementById('pill-toaction').textContent   = counts.toaction   + ' To Action';
-  document.getElementById('pill-inreview').textContent   = counts.inreview   + ' In Review';
-  document.getElementById('pill-inprogress').textContent = counts.inprogress + ' In Progress';
-  document.getElementById('pill-approved').textContent   = counts.approved   + ' Approved';
+  document.getElementById('progressCount').textContent = counts['approved'] + ' of ' + active + ' approved';
+  document.getElementById('pill-toreview').textContent    = counts['to-review']      + ' To Review';
+  document.getElementById('pill-inreview').textContent    = counts['in-review']      + ' In Review';
+  document.getElementById('pill-changes').textContent     = counts['changes-needed'] + ' Changes Needed';
+  document.getElementById('pill-approved').textContent    = counts['approved']        + ' Approved';
+  document.getElementById('pill-notrequired').textContent = counts['not-required']    + ' Not Required';
 }
 
 async function resetAll() {
   if (!confirm('Reset all page statuses and task checkboxes?')) return;
-  PAGES.forEach(p => { statusCache[p.id] = 'toaction'; });
-  const rows = PAGES.map(p => ({ page_id: p.id, status: 'toaction', updated_at: new Date().toISOString() }));
+  PAGES.forEach(p => { statusCache[p.id] = { client: 'to-review', agency: 'draft-written' }; });
+  const rows = PAGES.map(p => ({ page_id: p.id, client_status: 'to-review', agency_status: 'draft-written', updated_at: new Date().toISOString() }));
   await fetch(`${SUPABASE_URL}/rest/v1/wiltshire_energy_status`, {
     method: 'POST',
     headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'resolution=merge-duplicates' },
@@ -380,13 +430,14 @@ function copyReport() {
   const lines = ['Wiltshire Energy — Content Review Status', new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}), ''];
   const groups = {};
   PAGES.forEach(p => {
-    const st = STATUSES.find(s=>s.value===getStatus(p.id)).label;
+    const cs = CLIENT_STATUSES.find(s=>s.value===getClientStatus(p.id)).label;
+    const as = AGENCY_STATUSES.find(s=>s.value===getAgencyStatus(p.id)).label;
     const done = p.tasks.filter((_,ti)=>getTaskDone(p.id,ti)).length;
     if (!groups[p.sectionLabel]) groups[p.sectionLabel] = [];
-    groups[p.sectionLabel].push(`  ${st.padEnd(18)} ${p.name} (${done}/${p.tasks.length} tasks)`);
+    groups[p.sectionLabel].push(`  Client: ${cs.padEnd(20)} Agency: ${as.padEnd(18)} ${p.name}`);
   });
   Object.entries(groups).forEach(([sec,rows]) => { lines.push(sec); rows.forEach(r=>lines.push(r)); lines.push(''); });
-  const approved = PAGES.filter(p=>getStatus(p.id)==='approved').length;
+  const approved = PAGES.filter(p=>getClientStatus(p.id)==='approved').length;
   lines.push(`Total approved: ${approved} / ${PAGES.length}`);
   navigator.clipboard.writeText(lines.join('\n')).then(() => {
     const btn = document.getElementById('copyBtn');
