@@ -11,11 +11,8 @@
     background: #f4f6f9; color: #1a2332; min-height: 100vh;
   }
 
-  header {
-    background: #1a3a5c; color: #fff;
-    padding: 40px 48px 36px;
-  }
-  .header-inner { max-width: 900px; margin: 0 auto; }
+  header { background: #1a3a5c; color: #fff; padding: 40px 48px 36px; }
+  .header-inner { max-width: 960px; margin: 0 auto; }
   .badge {
     display: inline-block; background: rgba(255,255,255,0.15);
     color: rgba(255,255,255,0.85); font-size: 0.75rem; font-weight: 600;
@@ -25,8 +22,7 @@
   header h1 { font-size: 1.9rem; font-weight: 700; margin-bottom: 8px; line-height: 1.2; }
   header p { font-size: 0.95rem; color: rgba(255,255,255,0.65); max-width: 540px; line-height: 1.6; }
 
-  .main { max-width: 900px; margin: 0 auto; padding: 48px 48px 80px; }
-
+  .main { max-width: 960px; margin: 0 auto; padding: 48px 48px 80px; }
   h2 { font-size: 1.05rem; font-weight: 700; color: #1a3a5c; margin-bottom: 20px; letter-spacing: 0.1px; }
 
   /* SITEMAP CARDS */
@@ -47,10 +43,7 @@
   .sitemap-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
   .sitemap-card p  { font-size: 0.85rem; color: #5a6a7d; line-height: 1.55; flex: 1; margin-bottom: 20px; }
   .card-meta { display: flex; gap: 16px; margin-bottom: 20px; }
-  .meta-pill {
-    font-size: 0.75rem; color: #5a6a7d; background: #f1f5f9;
-    padding: 4px 10px; border-radius: 20px;
-  }
+  .meta-pill { font-size: 0.75rem; color: #5a6a7d; background: #f1f5f9; padding: 4px 10px; border-radius: 20px; }
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 11px 20px; border-radius: 7px; font-size: 0.85rem;
@@ -64,33 +57,81 @@
 
   /* CONTENT SECTION */
   .content-section { background: #fff; border: 1px solid #dde4ed; border-radius: 12px; padding: 32px; margin-bottom: 52px; }
-  .content-intro { font-size: 0.9rem; color: #5a6a7d; line-height: 1.6; margin-bottom: 24px; max-width: 620px; }
+  .content-intro { font-size: 0.9rem; color: #5a6a7d; line-height: 1.6; margin-bottom: 24px; max-width: 680px; }
+
+  /* PROGRESS BAR */
+  .progress-wrap { margin-bottom: 28px; }
+  .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .progress-label { font-size: 0.82rem; font-weight: 600; color: #1a3a5c; }
+  .progress-count { font-size: 0.82rem; color: #5a6a7d; }
+  .progress-bar-bg { background: #edf0f5; border-radius: 8px; height: 10px; overflow: hidden; }
+  .progress-bar-fill {
+    height: 100%; border-radius: 8px; background: #1b4332;
+    transition: width 0.4s ease; width: 0%;
+  }
+  .progress-pills { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+  .ppill {
+    font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 20px;
+  }
+  .ppill-toaction  { background: #f1f5f9; color: #64748b; }
+  .ppill-inreview  { background: #dbeafe; color: #1d4ed8; }
+  .ppill-inprogress { background: #fef3c7; color: #92400e; }
+  .ppill-approved  { background: #dcfce7; color: #166534; }
+
+  /* TABLE */
+  .table-toolbar { display: flex; justify-content: flex-end; margin-bottom: 14px; gap: 10px; }
+  .toolbar-btn {
+    background: #f1f5f9; border: 1px solid #dde4ed; border-radius: 6px;
+    padding: 7px 14px; font-size: 0.78rem; font-weight: 600; cursor: pointer;
+    color: #1a3a5c; transition: background 0.15s;
+  }
+  .toolbar-btn:hover { background: #e2e8f0; }
+  .toolbar-btn.copy-success { background: #dcfce7; color: #166534; border-color: #86efac; }
 
   .pages-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
   .pages-table th {
     text-align: left; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.6px;
-    text-transform: uppercase; color: #8a9bb0; padding: 0 12px 10px 0;
+    text-transform: uppercase; color: #8a9bb0; padding: 0 10px 10px 0;
     border-bottom: 1px solid #edf0f5;
   }
-  .pages-table td { padding: 9px 12px 9px 0; border-bottom: 1px solid #f3f5f8; color: #2d3748; vertical-align: top; }
+  .pages-table th:last-child { text-align: right; padding-right: 0; }
+  .pages-table td { padding: 9px 10px 9px 0; border-bottom: 1px solid #f3f5f8; color: #2d3748; vertical-align: middle; }
   .pages-table tr:last-child td { border-bottom: none; }
   .page-name { font-weight: 600; }
+
   .section-label {
     display: inline-block; font-size: 0.7rem; font-weight: 600;
     padding: 2px 8px; border-radius: 3px; white-space: nowrap;
   }
-  .sl-core     { background: #e8f0fe; color: #1a56db; }
+  .sl-core       { background: #e8f0fe; color: #1a56db; }
   .sl-services-h { background: #e9f5db; color: #1b4332; }
   .sl-services-b { background: #ddeef8; color: #0d3d56; }
-  .sl-grants   { background: #fff3cd; color: #664d03; }
-  .sl-about    { background: #f0e6ff; color: #3d1a78; }
+  .sl-grants     { background: #fff3cd; color: #664d03; }
+  .sl-about      { background: #f0e6ff; color: #3d1a78; }
+
   .review-count {
     display: inline-block; font-size: 0.72rem; font-weight: 600;
     background: #fff3e0; color: #e65100; padding: 2px 8px; border-radius: 3px;
   }
 
+  /* STATUS DROPDOWN */
+  .status-select {
+    appearance: none; -webkit-appearance: none;
+    border: 1.5px solid #e2e8f0; border-radius: 6px;
+    padding: 5px 28px 5px 10px; font-size: 0.78rem; font-weight: 600;
+    cursor: pointer; outline: none; min-width: 130px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a9bb0'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 10px center;
+    transition: border-color 0.15s;
+  }
+  .status-select:focus { border-color: #1a3a5c; }
+
+  .status-select.s-toaction   { background-color: #f8fafc; color: #475569; border-color: #cbd5e1; }
+  .status-select.s-inreview   { background-color: #eff6ff; color: #1d4ed8; border-color: #93c5fd; }
+  .status-select.s-inprogress { background-color: #fffbeb; color: #92400e; border-color: #fcd34d; }
+  .status-select.s-approved   { background-color: #f0fdf4; color: #166534; border-color: #86efac; }
+
   /* NEXT STEPS */
-  .steps-section { margin-bottom: 0; }
   .steps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .step-card {
     background: #fff; border: 1px solid #dde4ed; border-radius: 10px;
@@ -161,7 +202,31 @@
   <!-- CONTENT PAGES -->
   <h2>Website Content — First Draft (27 Pages)</h2>
   <div class="content-section">
-    <p class="content-intro">All 27 pages have been written and SEO optimised. Each page contains a target keyword, meta title, meta description, hero section, main body content, FAQs, and a call to action. Pages that require client input are clearly marked — see the review guide below.</p>
+
+    <p class="content-intro">All 27 pages have been written and SEO optimised. Review each page using the Word documents shared separately. Use the status dropdowns below to track your progress — your selections are saved automatically in your browser.</p>
+
+    <!-- PROGRESS BAR -->
+    <div class="progress-wrap">
+      <div class="progress-header">
+        <span class="progress-label">Review progress</span>
+        <span class="progress-count" id="progressCount">0 of 27 approved</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-pills">
+        <span class="ppill ppill-toaction" id="pill-toaction">— To Action</span>
+        <span class="ppill ppill-inreview" id="pill-inreview">— In Review</span>
+        <span class="ppill ppill-inprogress" id="pill-inprogress">— In Progress</span>
+        <span class="ppill ppill-approved" id="pill-approved">— Approved</span>
+      </div>
+    </div>
+
+    <!-- TOOLBAR -->
+    <div class="table-toolbar">
+      <button class="toolbar-btn" onclick="resetAll()">Reset all</button>
+      <button class="toolbar-btn" id="copyBtn" onclick="copyReport()">Copy status report</button>
+    </div>
 
     <table class="pages-table">
       <thead>
@@ -169,36 +234,10 @@
           <th>Page</th>
           <th>Section</th>
           <th>Review tasks</th>
+          <th style="text-align:right">Status</th>
         </tr>
       </thead>
-      <tbody>
-        <tr><td class="page-name">Homepage</td><td><span class="section-label sl-core">Core</span></td><td><span class="review-count">4 items</span></td></tr>
-        <tr><td class="page-name">Home Landing</td><td><span class="section-label sl-core">Core</span></td><td><span class="review-count">3 items</span></td></tr>
-        <tr><td class="page-name">Business Landing</td><td><span class="section-label sl-core">Core</span></td><td><span class="review-count">3 items</span></td></tr>
-        <tr><td class="page-name">Home Services Overview</td><td><span class="section-label sl-core">Core</span></td><td><span class="review-count">3 items</span></td></tr>
-        <tr><td class="page-name">Business Services Overview</td><td><span class="section-label sl-core">Core</span></td><td><span class="review-count">3 items</span></td></tr>
-        <tr><td class="page-name">Air Source Heat Pumps</td><td><span class="section-label sl-services-h">Services — Home</span></td><td><span class="review-count">5 items</span></td></tr>
-        <tr><td class="page-name">Ground Source Heat Pumps</td><td><span class="section-label sl-services-h">Services — Home</span></td><td><span class="review-count">4 items</span></td></tr>
-        <tr><td class="page-name">Solar PV</td><td><span class="section-label sl-services-h">Services — Home</span></td><td><span class="review-count">4 items</span></td></tr>
-        <tr><td class="page-name">EV Chargers</td><td><span class="section-label sl-services-h">Services — Home</span></td><td><span class="review-count">4 items</span></td></tr>
-        <tr><td class="page-name">Storage Heaters</td><td><span class="section-label sl-services-h">Services — Home</span></td><td><span class="review-count">3 items</span></td></tr>
-        <tr><td class="page-name">Insulation</td><td><span class="section-label sl-services-h">Services — Home</span></td><td><span class="review-count">3 items</span></td></tr>
-        <tr><td class="page-name">Renewable Technology Services</td><td><span class="section-label sl-services-b">Services — Business</span></td><td><span class="review-count">3 items</span></td></tr>
-        <tr><td class="page-name">Commercial Solar PV</td><td><span class="section-label sl-services-b">Services — Business</span></td><td><span class="review-count">5 items</span></td></tr>
-        <tr><td class="page-name">Design & Feasibility</td><td><span class="section-label sl-services-b">Services — Business</span></td><td><span class="review-count">3 items</span></td></tr>
-        <tr><td class="page-name">Funding Support</td><td><span class="section-label sl-services-b">Services — Business</span></td><td><span class="review-count">3 items</span></td></tr>
-        <tr><td class="page-name">Grants Overview</td><td><span class="section-label sl-grants">Grants</span></td><td><span class="review-count">3 items</span></td></tr>
-        <tr><td class="page-name">Boiler Upgrade Scheme</td><td><span class="section-label sl-grants">Grants</span></td><td><span class="review-count">3 items</span></td></tr>
-        <tr><td class="page-name">Great British Insulation Scheme</td><td><span class="section-label sl-grants">Grants</span></td><td><span class="review-count">3 items</span></td></tr>
-        <tr><td class="page-name">Energy Company Obligation (ECO4)</td><td><span class="section-label sl-grants">Grants</span></td><td><span class="review-count">3 items</span></td></tr>
-        <tr><td class="page-name">EV Homecharge Scheme</td><td><span class="section-label sl-grants">Grants</span></td><td><span class="review-count">3 items</span></td></tr>
-        <tr><td class="page-name">Warm and Well</td><td><span class="section-label sl-grants">Grants</span></td><td><span class="review-count">2 items</span></td></tr>
-        <tr><td class="page-name">Barclays Greener Home Reward</td><td><span class="section-label sl-grants">Grants</span></td><td><span class="review-count">2 items</span></td></tr>
-        <tr><td class="page-name">About Us</td><td><span class="section-label sl-about">About</span></td><td><span class="review-count">5 items</span></td></tr>
-        <tr><td class="page-name">Case Studies Overview</td><td><span class="section-label sl-about">About</span></td><td><span class="review-count">4 items</span></td></tr>
-        <tr><td class="page-name">Join Our Team</td><td><span class="section-label sl-about">About</span></td><td><span class="review-count">3 items</span></td></tr>
-        <tr><td class="page-name">Contact</td><td><span class="section-label sl-core">Core</span></td><td><span class="review-count">4 items</span></td></tr>
-        <tr><td class="page-name">FAQs</td><td><span class="section-label sl-core">Core</span></td><td><span class="review-count">3 items</span></td></tr>
+      <tbody id="pagesTableBody">
       </tbody>
     </table>
   </div>
@@ -216,22 +255,22 @@
     <div class="step-card">
       <div class="step-num">2</div>
       <div>
-        <h4>Confirm or amend</h4>
-        <p>Send back the reviewed documents with your changes. Anything marked clearly as needing your input is a placeholder — everything else is ready to go.</p>
+        <h4>Update your status</h4>
+        <p>As you work through each page, update its status above — To Action → In Review → In Progress → Approved. Your progress saves automatically.</p>
       </div>
     </div>
     <div class="step-card">
       <div class="step-num">3</div>
       <div>
-        <h4>Design begins</h4>
-        <p>Once content is confirmed, the designer works from the approved copy to build each page — no redesigns needed as content changes, because content leads.</p>
+        <h4>Send back your changes</h4>
+        <p>Return the reviewed Word documents with your amendments. Use "Copy status report" to send a quick summary of where things stand.</p>
       </div>
     </div>
     <div class="step-card">
       <div class="step-num">4</div>
       <div>
-        <h4>Build and launch</h4>
-        <p>Pages are built to the approved design with confirmed copy already in place. Final review, sign-off, and go live.</p>
+        <h4>Design begins</h4>
+        <p>Once content is confirmed, the designer builds each page from your approved copy. Content-first means no redesigns as copy changes.</p>
       </div>
     </div>
   </div>
@@ -241,6 +280,139 @@
 <footer>
   Prepared by Attain Digital &nbsp;·&nbsp; Wiltshire Energy Website Project &nbsp;·&nbsp; First Draft — June 2026
 </footer>
+
+<script>
+const PAGES = [
+  { id: 'homepage',            name: 'Homepage',                        section: 'core',       sectionLabel: 'Core',                tasks: 4 },
+  { id: 'home-landing',        name: 'Home Landing',                    section: 'core',       sectionLabel: 'Core',                tasks: 3 },
+  { id: 'business-landing',    name: 'Business Landing',                section: 'core',       sectionLabel: 'Core',                tasks: 3 },
+  { id: 'home-services-ov',    name: 'Home Services Overview',          section: 'core',       sectionLabel: 'Core',                tasks: 3 },
+  { id: 'biz-services-ov',     name: 'Business Services Overview',      section: 'core',       sectionLabel: 'Core',                tasks: 3 },
+  { id: 'ashp',                name: 'Air Source Heat Pumps',           section: 'services-h', sectionLabel: 'Services — Home',     tasks: 5 },
+  { id: 'gshp',                name: 'Ground Source Heat Pumps',        section: 'services-h', sectionLabel: 'Services — Home',     tasks: 4 },
+  { id: 'solar-pv',            name: 'Solar PV',                        section: 'services-h', sectionLabel: 'Services — Home',     tasks: 4 },
+  { id: 'ev-chargers',         name: 'EV Chargers',                     section: 'services-h', sectionLabel: 'Services — Home',     tasks: 4 },
+  { id: 'storage-heaters',     name: 'Storage Heaters',                 section: 'services-h', sectionLabel: 'Services — Home',     tasks: 3 },
+  { id: 'insulation',          name: 'Insulation',                      section: 'services-h', sectionLabel: 'Services — Home',     tasks: 3 },
+  { id: 'renewable-tech',      name: 'Renewable Technology Services',   section: 'services-b', sectionLabel: 'Services — Business', tasks: 3 },
+  { id: 'commercial-solar',    name: 'Commercial Solar PV',             section: 'services-b', sectionLabel: 'Services — Business', tasks: 5 },
+  { id: 'design-feasibility',  name: 'Design & Feasibility',            section: 'services-b', sectionLabel: 'Services — Business', tasks: 3 },
+  { id: 'funding-support',     name: 'Funding Support',                 section: 'services-b', sectionLabel: 'Services — Business', tasks: 3 },
+  { id: 'grants-overview',     name: 'Grants Overview',                 section: 'grants',     sectionLabel: 'Grants',              tasks: 3 },
+  { id: 'bus',                 name: 'Boiler Upgrade Scheme',           section: 'grants',     sectionLabel: 'Grants',              tasks: 3 },
+  { id: 'gbis',                name: 'Great British Insulation Scheme', section: 'grants',     sectionLabel: 'Grants',              tasks: 3 },
+  { id: 'eco4',                name: 'Energy Company Obligation (ECO4)',section: 'grants',     sectionLabel: 'Grants',              tasks: 3 },
+  { id: 'ev-homecharge',       name: 'EV Homecharge Scheme',            section: 'grants',     sectionLabel: 'Grants',              tasks: 3 },
+  { id: 'warm-well',           name: 'Warm and Well',                   section: 'grants',     sectionLabel: 'Grants',              tasks: 2 },
+  { id: 'barclays',            name: 'Barclays Greener Home Reward',    section: 'grants',     sectionLabel: 'Grants',              tasks: 2 },
+  { id: 'about',               name: 'About Us',                        section: 'about',      sectionLabel: 'About',               tasks: 5 },
+  { id: 'case-studies',        name: 'Case Studies Overview',           section: 'about',      sectionLabel: 'About',               tasks: 4 },
+  { id: 'join-team',           name: 'Join Our Team',                   section: 'about',      sectionLabel: 'About',               tasks: 3 },
+  { id: 'contact',             name: 'Contact',                         section: 'core',       sectionLabel: 'Core',                tasks: 4 },
+  { id: 'faqs',                name: 'FAQs',                            section: 'core',       sectionLabel: 'Core',                tasks: 3 },
+];
+
+const STATUSES = [
+  { value: 'toaction',   label: '⬜ To Action',   cls: 's-toaction'   },
+  { value: 'inreview',   label: '🔵 In Review',   cls: 's-inreview'   },
+  { value: 'inprogress', label: '🟡 In Progress', cls: 's-inprogress' },
+  { value: 'approved',   label: '✅ Approved',    cls: 's-approved'   },
+];
+
+const SECTION_CLS = {
+  'core':       'sl-core',
+  'services-h': 'sl-services-h',
+  'services-b': 'sl-services-b',
+  'grants':     'sl-grants',
+  'about':      'sl-about',
+};
+
+function getStatus(id) {
+  return localStorage.getItem('we-status-' + id) || 'toaction';
+}
+
+function setStatus(id, val) {
+  localStorage.setItem('we-status-' + id, val);
+  updateProgress();
+}
+
+function buildTable() {
+  const tbody = document.getElementById('pagesTableBody');
+  tbody.innerHTML = '';
+  PAGES.forEach(page => {
+    const current = getStatus(page.id);
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="page-name">${page.name}</td>
+      <td><span class="section-label ${SECTION_CLS[page.section]}">${page.sectionLabel}</span></td>
+      <td><span class="review-count">${page.tasks} item${page.tasks !== 1 ? 's' : ''}</span></td>
+      <td style="text-align:right">
+        <select class="status-select ${STATUSES.find(s=>s.value===current).cls}"
+                data-id="${page.id}"
+                onchange="handleChange(this)">
+          ${STATUSES.map(s => `<option value="${s.value}"${s.value===current?' selected':''}>${s.label}</option>`).join('')}
+        </select>
+      </td>`;
+    tbody.appendChild(tr);
+  });
+  updateProgress();
+}
+
+function handleChange(sel) {
+  const id  = sel.dataset.id;
+  const val = sel.value;
+  sel.className = 'status-select ' + STATUSES.find(s => s.value === val).cls;
+  setStatus(id, val);
+}
+
+function updateProgress() {
+  const counts = { toaction: 0, inreview: 0, inprogress: 0, approved: 0 };
+  PAGES.forEach(p => counts[getStatus(p.id)]++);
+  const total    = PAGES.length;
+  const approved = counts.approved;
+  const pct      = Math.round((approved / total) * 100);
+
+  document.getElementById('progressFill').style.width  = pct + '%';
+  document.getElementById('progressCount').textContent = approved + ' of ' + total + ' approved';
+
+  document.getElementById('pill-toaction').textContent   = counts.toaction   + ' To Action';
+  document.getElementById('pill-inreview').textContent   = counts.inreview   + ' In Review';
+  document.getElementById('pill-inprogress').textContent = counts.inprogress + ' In Progress';
+  document.getElementById('pill-approved').textContent   = counts.approved   + ' Approved';
+}
+
+function resetAll() {
+  if (!confirm('Reset all statuses back to "To Action"?')) return;
+  PAGES.forEach(p => localStorage.removeItem('we-status-' + p.id));
+  buildTable();
+}
+
+function copyReport() {
+  const lines = ['Wiltshire Energy — Content Review Status', new Date().toLocaleDateString('en-GB', {day:'numeric',month:'long',year:'numeric'}), ''];
+  const groups = {};
+  PAGES.forEach(p => {
+    const st = STATUSES.find(s => s.value === getStatus(p.id)).label;
+    if (!groups[p.sectionLabel]) groups[p.sectionLabel] = [];
+    groups[p.sectionLabel].push(`  ${st.padEnd(18)} ${p.name}`);
+  });
+  Object.entries(groups).forEach(([section, rows]) => {
+    lines.push(section);
+    rows.forEach(r => lines.push(r));
+    lines.push('');
+  });
+  const approved = PAGES.filter(p => getStatus(p.id) === 'approved').length;
+  lines.push(`Total approved: ${approved} / ${PAGES.length}`);
+
+  navigator.clipboard.writeText(lines.join('\n')).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copy-success');
+    setTimeout(() => { btn.textContent = 'Copy status report'; btn.classList.remove('copy-success'); }, 2000);
+  });
+}
+
+buildTable();
+</script>
 
 </body>
 </html>
