@@ -181,6 +181,7 @@
 
     <div class="table-toolbar">
       <button class="toolbar-btn" onclick="resetAll()">Reset all</button>
+      <button class="toolbar-btn" id="refreshBtn" onclick="refreshStatuses()">🔄 Refresh</button>
       <button class="toolbar-btn" id="copyBtn" onclick="copyReport()">Copy status report</button>
     </div>
 
@@ -249,8 +250,30 @@ const STATUSES = [
 ];
 const SECTION_CLS = { core:'sl-core', 'services-h':'sl-services-h', 'services-b':'sl-services-b', grants:'sl-grants', about:'sl-about' };
 
-const getStatus  = id  => localStorage.getItem('we-status-' + id) || 'toaction';
-const setStatus  = (id,v) => { localStorage.setItem('we-status-' + id, v); updateProgress(); };
+const SUPABASE_URL = 'https://jecwtcwiveetxeunbtgd.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImplY3d0Y3dpdmVldHhldW5idGdkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyNzk2MjEsImV4cCI6MjA5Mjg1NTYyMX0.VMPx2nBkq8oUfRNXqU8ZfF0Yx5U4OJMHxkAZ9TUOD_I';
+const statusCache = {};
+
+async function loadStatuses() {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/wiltshire_energy_status?select=page_id,status`, {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+    });
+    if (res.ok) { const rows = await res.json(); rows.forEach(r => statusCache[r.page_id] = r.status); }
+  } catch(e) {}
+}
+
+function getStatus(id) { return statusCache[id] || 'toaction'; }
+
+function setStatus(id, v) {
+  statusCache[id] = v;
+  fetch(`${SUPABASE_URL}/rest/v1/wiltshire_energy_status`, {
+    method: 'POST',
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'resolution=merge-duplicates' },
+    body: JSON.stringify({ page_id: id, status: v, updated_at: new Date().toISOString() })
+  });
+  updateProgress();
+}
 const getTaskDone = (pid,ti) => localStorage.getItem(`we-task-${pid}-${ti}`) === '1';
 const setTaskDone = (pid,ti,v) => localStorage.setItem(`we-task-${pid}-${ti}`, v ? '1' : '0');
 
@@ -332,13 +355,25 @@ function updateProgress() {
   document.getElementById('pill-approved').textContent   = counts.approved   + ' Approved';
 }
 
-function resetAll() {
+async function resetAll() {
   if (!confirm('Reset all page statuses and task checkboxes?')) return;
-  PAGES.forEach(p => {
-    localStorage.removeItem('we-status-' + p.id);
-    p.tasks.forEach((_,ti) => localStorage.removeItem(`we-task-${p.id}-${ti}`));
+  PAGES.forEach(p => { statusCache[p.id] = 'toaction'; });
+  const rows = PAGES.map(p => ({ page_id: p.id, status: 'toaction', updated_at: new Date().toISOString() }));
+  await fetch(`${SUPABASE_URL}/rest/v1/wiltshire_energy_status`, {
+    method: 'POST',
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'resolution=merge-duplicates' },
+    body: JSON.stringify(rows)
   });
+  PAGES.forEach(p => p.tasks.forEach((_,ti) => localStorage.removeItem(`we-task-${p.id}-${ti}`)));
   buildTable();
+}
+
+async function refreshStatuses() {
+  const btn = document.getElementById('refreshBtn');
+  btn.textContent = 'Refreshing...'; btn.disabled = true;
+  await loadStatuses();
+  buildTable();
+  btn.textContent = '🔄 Refresh'; btn.disabled = false;
 }
 
 function copyReport() {
@@ -361,7 +396,7 @@ function copyReport() {
   });
 }
 
-buildTable();
+loadStatuses().then(() => buildTable());
 </script>
 </body>
 </html>
