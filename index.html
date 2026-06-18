@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wiltshire Energy — Website Strategy & Content</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f4f6f9; color: #1a2332; min-height: 100vh;
+  }
+
+  header {
+    background: #1a3a5c; color: #fff;
+    padding: 40px 48px 36px;
+  }
+  .header-inner { max-width: 900px; margin: 0 auto; }
+  .badge {
+    display: inline-block; background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.85); font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.8px; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 20px; margin-bottom: 16px;
+  }
+  header h1 { font-size: 1.9rem; font-weight: 700; margin-bottom: 8px; line-height: 1.2; }
+  header p { font-size: 0.95rem; color: rgba(255,255,255,0.65); max-width: 540px; line-height: 1.6; }
+
+  .main { max-width: 900px; margin: 0 auto; padding: 48px 48px 80px; }
+
+  h2 { font-size: 1.05rem; font-weight: 700; color: #1a3a5c; margin-bottom: 20px; letter-spacing: 0.1px; }
+
+  /* SITEMAP CARDS */
+  .sitemap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 52px; }
+  .sitemap-card {
+    background: #fff; border: 1px solid #dde4ed; border-radius: 12px;
+    padding: 28px; display: flex; flex-direction: column;
+    transition: box-shadow 0.15s, transform 0.15s;
+  }
+  .sitemap-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); transform: translateY(-2px); }
+  .card-tag {
+    display: inline-block; font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.8px; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 4px; margin-bottom: 14px;
+  }
+  .tag-wiltshire { background: #dce8f5; color: #1a3a5c; }
+  .tag-cotswold  { background: #d8f3dc; color: #1b4332; }
+  .sitemap-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+  .sitemap-card p  { font-size: 0.85rem; color: #5a6a7d; line-height: 1.55; flex: 1; margin-bottom: 20px; }
+  .card-meta { display: flex; gap: 16px; margin-bottom: 20px; }
+  .meta-pill {
+    font-size: 0.75rem; color: #5a6a7d; background: #f1f5f9;
+    padding: 4px 10px; border-radius: 20px;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 20px; border-radius: 7px; font-size: 0.85rem;
+    font-weight: 600; text-decoration: none; transition: background 0.15s;
+    align-self: flex-start;
+  }
+  .btn-navy { background: #1a3a5c; color: #fff; }
+  .btn-navy:hover { background: #2a5282; }
+  .btn-green { background: #1b4332; color: #fff; }
+  .btn-green:hover { background: #2d6a4f; }
+
+  /* CONTENT SECTION */
+  .content-section { background: #fff; border: 1px solid #dde4ed; border-radius: 12px; padding: 32px; margin-bottom: 52px; }
+  .content-intro { font-size: 0.9rem; color: #5a6a7d; line-height: 1.6; margin-bottom: 24px; max-width: 620px; }
+
+  .pages-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+  .pages-table th {
+    text-align: left; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: #8a9bb0; padding: 0 12px 10px 0;
+    border-bottom: 1px solid #edf0f5;
+  }
+  .pages-table td { padding: 9px 12px 9px 0; border-bottom: 1px solid #f3f5f8; color: #2d3748; vertical-align: top; }
+  .pages-table tr:last-child td { border-bottom: none; }
+  .page-name { font-weight: 600; }
+  .section-label {
+    display: inline-block; font-size: 0.7rem; font-weight: 600;
+    padding: 2px 8px; border-radius: 3px; white-space: nowrap;
+  }
+  .sl-core     { background: #e8f0fe; color: #1a56db; }
+  .sl-services-h { background: #e9f5db; color: #1b4332; }
+  .sl-services-b { background: #ddeef8; color: #0d3d56; }
+  .sl-grants   { background: #fff3cd; color: #664d03; }
+  .sl-about    { background: #f0e6ff; color: #3d1a78; }
+  .review-count {
+    display: inline-block; font-size: 0.72rem; font-weight: 600;
+    background: #fff3e0; color: #e65100; padding: 2px 8px; border-radius: 3px;
+  }
+
+  /* NEXT STEPS */
+  .steps-section { margin-bottom: 0; }
+  .steps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .step-card {
+    background: #fff; border: 1px solid #dde4ed; border-radius: 10px;
+    padding: 22px 24px; display: flex; gap: 16px; align-items: flex-start;
+  }
+  .step-num {
+    width: 32px; height: 32px; border-radius: 50%; background: #1a3a5c;
+    color: #fff; font-size: 0.8rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .step-card h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 4px; }
+  .step-card p  { font-size: 0.8rem; color: #5a6a7d; line-height: 1.5; }
+
+  footer {
+    text-align: center; padding: 24px;
+    font-size: 0.78rem; color: #aab; border-top: 1px solid #e8ecf0;
+  }
+
+  @media (max-width: 680px) {
+    .sitemap-grid, .steps-grid { grid-template-columns: 1fr; }
+    header { padding: 28px 24px; }
+    .main { padding: 32px 24px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="badge">Prepared by Attain Digital</div>
+    <h1>Wiltshire Energy — Website Strategy & Content</h1>
+    <p>First draft of the full website content and visual site architecture. 27 pages written, SEO optimised, and structured for review.</p>
+  </div>
+</header>
+
+<div class="main">
+
+  <!-- SITEMAPS -->
+  <h2>Visual Sitemaps</h2>
+  <div class="sitemap-grid">
+
+    <div class="sitemap-card">
+      <span class="card-tag tag-wiltshire">Wiltshire Energy</span>
+      <h3>Wiltshire Energy Sitemap</h3>
+      <p>Proposed site architecture for the new Wiltshire Energy website — 39 pages across Home, Business, Services, Grants, About, Case Studies and more.</p>
+      <div class="card-meta">
+        <span class="meta-pill">39 pages</span>
+        <span class="meta-pill">9 sections</span>
+        <span class="meta-pill">PDF export</span>
+      </div>
+      <a href="wiltshire-energy-sitemap.html" class="btn btn-navy">View Sitemap →</a>
+    </div>
+
+    <div class="sitemap-card">
+      <span class="card-tag tag-cotswold">Reference Site</span>
+      <h3>Cotswold Energy Sitemap</h3>
+      <p>Sitemap of the live Cotswold Energy website — provided as a structural reference and benchmark for the Wiltshire Energy build.</p>
+      <div class="card-meta">
+        <span class="meta-pill">46 pages</span>
+        <span class="meta-pill">9 sections</span>
+        <span class="meta-pill">PDF export</span>
+      </div>
+      <a href="cotswold-energy-sitemap.html" class="btn btn-green">View Sitemap →</a>
+    </div>
+
+  </div>
+
+  <!-- CONTENT PAGES -->
+  <h2>Website Content — First Draft (27 Pages)</h2>
+  <div class="content-section">
+    <p class="content-intro">All 27 pages have been written and SEO optimised. Each page contains a target keyword, meta title, meta description, hero section, main body content, FAQs, and a call to action. Pages that require client input are clearly marked — see the review guide below.</p>
+
+    <table class="pages-table">
+      <thead>
+        <tr>
+          <th>Page</th>
+          <th>Section</th>
+          <th>Review tasks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="page-name">Homepage</td><td><span class="section-label sl-core">Core</span></td><td><span class="review-count">4 items</span></td></tr>
+        <tr><td class="page-name">Home Landing</td><td><span class="section-label sl-core">Core</span></td><td><span class="review-count">3 items</span></td></tr>
+        <tr><td class="page-name">Business Landing</td><td><span class="section-label sl-core">Core</span></td><td><span class="review-count">3 items</span></td></tr>
+        <tr><td class="page-name">Home Services Overview</td><td><span class="section-label sl-core">Core</span></td><td><span class="review-count">3 items</span></td></tr>
+        <tr><td class="page-name">Business Services Overview</td><td><span class="section-label sl-core">Core</span></td><td><span class="review-count">3 items</span></td></tr>
+        <tr><td class="page-name">Air Source Heat Pumps</td><td><span class="section-label sl-services-h">Services — Home</span></td><td><span class="review-count">5 items</span></td></tr>
+        <tr><td class="page-name">Ground Source Heat Pumps</td><td><span class="section-label sl-services-h">Services — Home</span></td><td><span class="review-count">4 items</span></td></tr>
+        <tr><td class="page-name">Solar PV</td><td><span class="section-label sl-services-h">Services — Home</span></td><td><span class="review-count">4 items</span></td></tr>
+        <tr><td class="page-name">EV Chargers</td><td><span class="section-label sl-services-h">Services — Home</span></td><td><span class="review-count">4 items</span></td></tr>
+        <tr><td class="page-name">Storage Heaters</td><td><span class="section-label sl-services-h">Services — Home</span></td><td><span class="review-count">3 items</span></td></tr>
+        <tr><td class="page-name">Insulation</td><td><span class="section-label sl-services-h">Services — Home</span></td><td><span class="review-count">3 items</span></td></tr>
+        <tr><td class="page-name">Renewable Technology Services</td><td><span class="section-label sl-services-b">Services — Business</span></td><td><span class="review-count">3 items</span></td></tr>
+        <tr><td class="page-name">Commercial Solar PV</td><td><span class="section-label sl-services-b">Services — Business</span></td><td><span class="review-count">5 items</span></td></tr>
+        <tr><td class="page-name">Design & Feasibility</td><td><span class="section-label sl-services-b">Services — Business</span></td><td><span class="review-count">3 items</span></td></tr>
+        <tr><td class="page-name">Funding Support</td><td><span class="section-label sl-services-b">Services — Business</span></td><td><span class="review-count">3 items</span></td></tr>
+        <tr><td class="page-name">Grants Overview</td><td><span class="section-label sl-grants">Grants</span></td><td><span class="review-count">3 items</span></td></tr>
+        <tr><td class="page-name">Boiler Upgrade Scheme</td><td><span class="section-label sl-grants">Grants</span></td><td><span class="review-count">3 items</span></td></tr>
+        <tr><td class="page-name">Great British Insulation Scheme</td><td><span class="section-label sl-grants">Grants</span></td><td><span class="review-count">3 items</span></td></tr>
+        <tr><td class="page-name">Energy Company Obligation (ECO4)</td><td><span class="section-label sl-grants">Grants</span></td><td><span class="review-count">3 items</span></td></tr>
+        <tr><td class="page-name">EV Homecharge Scheme</td><td><span class="section-label sl-grants">Grants</span></td><td><span class="review-count">3 items</span></td></tr>
+        <tr><td class="page-name">Warm and Well</td><td><span class="section-label sl-grants">Grants</span></td><td><span class="review-count">2 items</span></td></tr>
+        <tr><td class="page-name">Barclays Greener Home Reward</td><td><span class="section-label sl-grants">Grants</span></td><td><span class="review-count">2 items</span></td></tr>
+        <tr><td class="page-name">About Us</td><td><span class="section-label sl-about">About</span></td><td><span class="review-count">5 items</span></td></tr>
+        <tr><td class="page-name">Case Studies Overview</td><td><span class="section-label sl-about">About</span></td><td><span class="review-count">4 items</span></td></tr>
+        <tr><td class="page-name">Join Our Team</td><td><span class="section-label sl-about">About</span></td><td><span class="review-count">3 items</span></td></tr>
+        <tr><td class="page-name">Contact</td><td><span class="section-label sl-core">Core</span></td><td><span class="review-count">4 items</span></td></tr>
+        <tr><td class="page-name">FAQs</td><td><span class="section-label sl-core">Core</span></td><td><span class="review-count">3 items</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- NEXT STEPS -->
+  <h2>What Happens Next</h2>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <div>
+        <h4>Review the content</h4>
+        <p>Work through each Word document. Where you see 🟧 CLIENT REVIEW REQUIRED or [CLIENT TO CONFIRM], add your answers directly into the document.</p>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <div>
+        <h4>Confirm or amend</h4>
+        <p>Send back the reviewed documents with your changes. Anything marked clearly as needing your input is a placeholder — everything else is ready to go.</p>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <div>
+        <h4>Design begins</h4>
+        <p>Once content is confirmed, the designer works from the approved copy to build each page — no redesigns needed as content changes, because content leads.</p>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">4</div>
+      <div>
+        <h4>Build and launch</h4>
+        <p>Pages are built to the approved design with confirmed copy already in place. Final review, sign-off, and go live.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Prepared by Attain Digital &nbsp;·&nbsp; Wiltshire Energy Website Project &nbsp;·&nbsp; First Draft — June 2026
+</footer>
+
+</body>
+</html>
