@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attain Digital — QR Card</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #f1f5f9;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    padding: 20px;
+  }
+
+  .card {
+    background: #ffffff;
+    border-radius: 28px;
+    width: 380px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  }
+
+  .card-header {
+    background: #0a0a0a;
+    padding: 28px 32px 24px;
+    text-align: center;
+  }
+
+  .logo-text {
+    font-size: 26px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+  }
+
+  .logo-text span {
+    color: #06b6d4;
+  }
+
+  .logo-sub {
+    font-size: 10px;
+    font-weight: 600;
+    color: #64748b;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .card-body {
+    padding: 28px 32px;
+    text-align: center;
+  }
+
+  .tagline {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+
+  .tagline span {
+    color: #06b6d4;
+  }
+
+  .qr-wrapper {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 20px;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+
+  #qrcode canvas, #qrcode img {
+    display: block;
+    border-radius: 6px;
+  }
+
+  .scan-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+
+  .scan-desc {
+    font-size: 13px;
+    color: #94a3b8;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  .card-footer {
+    background: #06b6d4;
+    padding: 14px 32px;
+    text-align: center;
+  }
+
+  .card-footer p {
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .results-strip {
+    display: flex;
+    gap: 0;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+  }
+
+  .result-item {
+    flex: 1;
+    padding: 10px 8px;
+    text-align: center;
+    background: #f8fafc;
+    border-right: 1px solid #e2e8f0;
+  }
+
+  .result-item:last-child {
+    border-right: none;
+  }
+
+  .result-num {
+    font-size: 14px;
+    font-weight: 800;
+    color: #0f172a;
+    display: block;
+  }
+
+  .result-label {
+    font-size: 9px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-top: 2px;
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="logo-text">ATTAIN<span>.</span>DIGITAL</div>
+      <div class="logo-sub">Solar &amp; Heat Pump Marketing</div>
+    </div>
+
+    <div class="card-body">
+      <p class="tagline">Scale your solar &amp; heat pump business to <span>multiple six figures a month</span></p>
+
+      <div class="results-strip">
+        <div class="result-item">
+          <span class="result-num">3→10</span>
+          <span class="result-label">Installs per week</span>
+        </div>
+        <div class="result-item">
+          <span class="result-num">£200k→£650k</span>
+          <span class="result-label">Turnover in 12 months</span>
+        </div>
+        <div class="result-item">
+          <span class="result-num">£400k</span>
+          <span class="result-label">Won in 3 months</span>
+        </div>
+      </div>
+
+      <div class="qr-wrapper">
+        <div id="qrcode"></div>
+      </div>
+
+      <p class="scan-label">Scan to connect on WhatsApp</p>
+      <p class="scan-desc">Opens WhatsApp on your phone — just hit send and I'll come back to you</p>
+    </div>
+
+    <div class="card-footer">
+      <p>attaindigital.co &nbsp;·&nbsp; InstallerSHOW 2026</p>
+    </div>
+  </div>
+
+  <script>
+    new QRCode(document.getElementById("qrcode"), {
+      text: "https://wa.me/447577005270?text=Hi+Tom%2C+I+met+you+at+InstallerSHOW+today+%E2%80%94+interested+in+finding+out+more+about+what+you+do.",
+      width: 240,
+      height: 240,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  </script>
+
+</body>
+</html>
